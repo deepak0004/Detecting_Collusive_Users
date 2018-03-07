@@ -1,5 +1,6 @@
 import pickle
 import time
+import sys
 from twitter import *
 
 #-----------------------------------------------------------------------
@@ -7,22 +8,23 @@ from twitter import *
 #  - lists all of a given user's friends (ie, followees (following) ), the ones user is following
 #-----------------------------------------------------------------------
 
+st = sys.argv[1]
+print st
 config = {}
-execfile("config.py", config)
-#-----------------------------------------------------------------------
-# create twitter API object
-#-----------------------------------------------------------------------
+execfile(st, config)
 twitter = Twitter(auth = OAuth(config["access_key"], config["access_secret"], config["consumer_key"], config["consumer_secret"]))
+
 us_list = []
 dictt = {}
 
-inputt = open('users.txt', 'r')
+inputt = open('users_less_followees.txt', 'r')
 for line in inputt:
     us = str(line) 
     us_list.append(us) 
 
 #outputt = open('user_following.txt', 'w', 0)
-for username in us_list: 
+for username in us_list:
+        username = username.strip() 
         username = username.strip('\n')
         #outputt.write(username + ",")
         flag = 0
@@ -55,6 +57,7 @@ for username in us_list:
                                 subquery = twitter.users.lookup(user_id = ids)
                                 flag2 = 1
                             except Exception:
+                                print 'yo2', " ", flag2
                                 time.sleep(60) 
                         print len(ids), " ", len(subquery)
                         for user in subquery:
@@ -64,6 +67,7 @@ for username in us_list:
                 #outputt.write("\n")
                 print len(dictt[username])
             except Exception:
+                print 'yo', " ", flag
                 time.sleep(60)
 
 with open("user_and_who_he_following.dump", "wb") as fp:   #Pickling
