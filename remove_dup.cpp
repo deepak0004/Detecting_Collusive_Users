@@ -5,7 +5,7 @@ map<string, int> ma;
 int main()
 {
     #ifndef  ONLINE_JUDGE
-      freopen("input.txt", "r", stdin);
+      freopen("customers_like4like.txt", "r", stdin);
     #endif
 
     string st;
