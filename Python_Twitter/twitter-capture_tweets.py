@@ -1,7 +1,9 @@
 import pickle
 import time
 import sys
+from Object import *
 from twitter import *
+import unicodedata
 
 st = sys.argv[1]
 print st
@@ -34,15 +36,13 @@ for username in us_list:
                 # loop through each of my statuses, and print its content
                 #-----------------------------------------------------------------------
                 for status in results:
-                    print num, " ", status["text"], " ", status["favorite_count"], " ", status["retweet_count"]
+                    status["text"] = unicodedata.normalize('NFKD', status["text"]).encode('ascii','ignore')
+                    print num, " ", str(status["id"]), " ", status["text"], " ", str(status["favorite_count"]), " ", str(status["retweet_count"])
                     num += 1
-                    listt = []
-
-                    for retweet in retweets:
-                        listt.append( str( status["text"] ) )
-                        listt.append( str( status["favorite_count"] ) )
-                        listt.append( str( status["retweet_count"] ) )
-                    mapp_username_list[ username ].extend( listt ) 
+                    #print 'boo2'
+                    obj = Object(str(status["id"]), status["text"], str(status["favorite_count"]), str(status["retweet_count"]))        
+                    #print 'boo'            
+                    mapp_username_list[ username ].append( obj ) 
             except Exception:
                 print 'yo', flag
                 time.sleep(60)	

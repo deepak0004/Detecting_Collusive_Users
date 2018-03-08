@@ -1,12 +1,11 @@
 import pickle
 import time
 import sys
+from Object import *
 from twitter import *
+import unicodedata
 
-#-----------------------------------------------------------------------
-# twitter-friends
-#  - lists all of a given user's friends (ie, followees (following) ), the ones user is following
-#-----------------------------------------------------------------------
+# twitter-friends: lists all of a given user's friends (ie, followees (following) ), the ones user is following
 
 st = sys.argv[1]
 print st
@@ -33,18 +32,14 @@ for username in us_list:
                 query = twitter.friends.ids(screen_name = username) 
                 flag = 1
 
-                #-----------------------------------------------------------------------
                 # tell the user how many friends we've found.
                 # note that the twitter API will NOT immediately give us any more 
                 # information about friends except their numeric IDs...
-                #-----------------------------------------------------------------------
                 #outputt.write( str(len(query["ids"])) ) 
                 print username, " ", len(query["ids"]), " ", len(username)
                 dictt[ username ] = [] 
                 if( len(query["ids"]) ):
-                    #-----------------------------------------------------------------------
                     # now we loop through them to pull out more info, in blocks of 100.
-                    #-----------------------------------------------------------------------
                     for n in range(0, len(query["ids"]), 98):
                         ids = [-1]
                         ids.extend( query["ids"][n:n+98] )
