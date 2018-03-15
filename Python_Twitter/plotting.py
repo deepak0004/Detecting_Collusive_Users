@@ -10,21 +10,28 @@ import sys
 
 NO_OF_USERS = 150
 COLUMN_CONSI = int(sys.argv[1])
+FLOATT = int(sys.argv[2])
 
 coun = 0
 mean = 0
 dictt = {}
 filee = open('plotting_data.txt', 'r')
 
+def func( val ):
+    if( FLOATT==1 ):
+       return float(splitted[COLUMN_CONSI])
+    else:
+       return int(splitted[COLUMN_CONSI])	
+
 for line in filee:
    splitted = line.split(',')	
    if( coun in dictt ):
-   	  dictt[coun].append( int(splitted[COLUMN_CONSI]) )
+   	  dictt[coun].append( func(splitted[COLUMN_CONSI]) )
    else: 
-      dictt[coun] = [ int(splitted[COLUMN_CONSI]) ]
+      dictt[coun] = [ func(splitted[COLUMN_CONSI]) ]
    coun += 1
    coun %= NO_OF_USERS
-   mean += int(splitted[COLUMN_CONSI])
+   mean += func(splitted[COLUMN_CONSI])
 
 for i in range(NO_OF_USERS):
     listtx = []
@@ -38,7 +45,7 @@ for i in range(NO_OF_USERS):
     fig = matpl.pyplot.gcf()
     fig.set_size_inches(10, 7)
     
-    st = 'Plots/' + str(COLUMN_CONSI) + str(i)
+    st = 'Plots/' + str(i)
     plt.savefig(st + '.png')
 
 avg = float(mean) / NO_OF_USERS
