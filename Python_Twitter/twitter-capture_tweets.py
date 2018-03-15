@@ -28,7 +28,7 @@ for username in us_list:
         while( flag == 0 ):
             try:
                 print username, " ", len(username)
-                results = twitter.statuses.user_timeline(screen_name = username, count = 200)
+                results = twitter.statuses.user_timeline(screen_name = username, count = 20)
                 flag = 1
                 mapp_username_list[ username ] = []
                 
@@ -37,7 +37,7 @@ for username in us_list:
                 #-----------------------------------------------------------------------
                 for status in results:
                     status["text"] = unicodedata.normalize('NFKD', status["text"]).encode('ascii','ignore')
-                    print num, " ", str(status["id"]), " ", status["text"], " ", str(status["favorite_count"]), " ", str(status["retweet_count"])
+                    #print num, " ", str(status["id"]), " ", status["text"], " ", str(status["favorite_count"]), " ", str(status["retweet_count"])
                     num += 1
                     #print 'boo2'
                     obj = Object(str(status["id"]), status["text"], str(status["favorite_count"]), str(status["retweet_count"]))        
