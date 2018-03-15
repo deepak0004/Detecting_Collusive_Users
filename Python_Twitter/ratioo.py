@@ -4,6 +4,7 @@ import sys
 from Object import *
 from twitter import *
 import unicodedata
+import json
 
 st = sys.argv[1]
 print st
@@ -38,13 +39,13 @@ for username in us_list:
         while( flag == 0 ):
             try:
                 #print 'io'
-                #print username
+                print username
                 query = twitter.users.lookup( screen_name=username ) 
                 #print 'po'
                 flag = 1
                 noofurl = 0
                 retweet = 0
-
+                 
                 for user in query:
                         print user["screen_name"]
                         flag2 = 0
@@ -82,66 +83,23 @@ for username in us_list:
                         print str(noofurl) + "," + str(retweet)
 
                         outputt.write(str(user["friends_count"]) + "," + str(user["followers_count"]) + "," + str(ratio) + "," + str(user["favourites_count"]) + "," + str(user["statuses_count"]) + "," + str(user["verified"]) + "," + str(noofurl) + "," + str(retweet) + "\n")
-            except TwitterHTTPError as e:
-                print '###########################################################'
-                print '###########################################################'
-                print '###########################################################'
-                print '###########################################################'
-                print e
-                print '###########################################################'
-                print '###########################################################'
-                print '###########################################################'
-                print '###########################################################'
-                print e.message
-                print '###########################################################'
-                print '###########################################################'
-                print '###########################################################'
-                print '###########################################################'             
+            except TwitterError as e:
+                stst = ''
+                flag3 = 0
+                for pp in e[0]:
+                    if( pp=='{' or flag3 == 1 ):
+                       stst += pp
+                       flag3 = 1
+
+                stst = stst.split(':')
+                op =  stst[3][1] + stst[3][2]
+                print op
+                if( op == "17" ):
+                    flag = 1
+                    outputt.write("-1" + "," + "-1" + "," + "-1" + "," + "-1" + "," + "-1" + "," + "-1" + "," + "-1" + "," + "-1" + "\n")
+                    continue
                 print 'yo', " ", flag
                 time.sleep(60)
-
-'''
-if( len(listt)>1 ):
-    listt.append(-1)
-    #outputt.write(username + ",")
-    flag = 0
-    while( flag == 0 ):
-        try:
-            query = twitter.users.lookup(screen_name = listt) 
-            flag = 1
-            noofurl = 0
-            retweet = 0
-
-            for user in query:
-                    flag2 = 0
-                    while( flag2 == 0 ):
-                        try:
-                            results = twitter.statuses.user_timeline(screen_name = user["screen_name"], count = 20)
-                            flag2 = 1
-                        except Exception:
-                            print 'yo2', " ", flag2
-                            time.sleep(60) 
-
-                    for status in results:
-                        status["text"] = unicodedata.normalize('NFKD', status["text"]).encode('ascii','ignore')
-                        obj = Object(str(status["id"]), status["text"], str(status["favorite_count"]), str(status["retweet_count"]))
-                        mapp_username_list[ username ].append( obj ) 
-                        if( ("http" in status["text"]) or ("www." in status["text"]) ):
-                           noofurl += 1
-                        retweet += int(status["retweet_count"])
-
-                    fri = user["friends_count"]
-                    foll = user["followers_count"] 
-                    ratio =  "%.10f" %  ( float(foll) / (fri + foll) )
-             
-                    print user["friends_count"] + "," + user["followers_count"] + ",", 
-                    print ratio + "," + user["favourites_count"] + ",",
-                    print user["statuses_count"] + "," + user["verified"], ",",
-                    print noofurl + "," + retweet
-        except Exception:
-            print 'yo', " ", flag
-            time.sleep(60)
-'''
 
 with open("user_and_who_retweeted.dump", "wb") as fp:   #Pickling
     pickle.dump(mapp_username_list, fp)
