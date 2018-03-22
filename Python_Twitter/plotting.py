@@ -8,14 +8,14 @@ import matplotlib as matpl
 from textwrap import wrap
 import sys
 
-NO_OF_USERS = 150
+NO_OF_USERS = 210
 COLUMN_CONSI = int(sys.argv[1])
 FLOATT = int(sys.argv[2])
 
 coun = 0
 mean = 0
 dictt = {}
-filee = open('plotting_data.txt', 'r')
+filee = open('plotting_data2.txt', 'r')
 
 def func( val ):
     if( FLOATT==1 ):
@@ -23,6 +23,7 @@ def func( val ):
     else:
        return int(splitted[COLUMN_CONSI])	
 
+oo = 0
 for line in filee:
    splitted = line.split(',')	
    if( coun in dictt ):
@@ -31,12 +32,20 @@ for line in filee:
       dictt[coun] = [ func(splitted[COLUMN_CONSI]) ]
    coun += 1
    coun %= NO_OF_USERS
-   mean += func(splitted[COLUMN_CONSI])
+   if( func(splitted[COLUMN_CONSI])!=-1 ):
+       mean += func(splitted[COLUMN_CONSI])
+   #print func(splitted[COLUMN_CONSI]) 
+   oo += 1
+
+#print 'coun: ', coun
+#print 'oo: ', oo
 
 for i in range(NO_OF_USERS):
     listtx = []
     for j in range( len(dictt[i]) ):
         listtx.append(j)
+
+    #print 'dictt[i]: ', dictt[i] 
 
     fig = plt.figure()
     plt.plot(listtx, dictt[i], marker='o')
@@ -48,5 +57,5 @@ for i in range(NO_OF_USERS):
     st = 'Plots/' + str(i)
     plt.savefig(st + '.png')
 
-avg = float(mean) / NO_OF_USERS
+avg = float(mean) / oo
 print avg
