@@ -52,6 +52,7 @@ while(1):
                     prev_list = []
                     inter = 0
                     tweet = 0
+                    yocheck = 0
 
                     for user in query:
                             print user["screen_name"]
@@ -60,9 +61,27 @@ while(1):
                                 try:
                                     results = twitter.statuses.user_timeline(screen_name = user["screen_name"], count = 200)
                                     flag2 = 1
-                                except Exception:
+                                except Exception as e:
+                                    stst = ''
+                                    flag3 = 0
+                                    for pp in e[0]:
+                                        if( pp=='{' or flag3 == 1 ):
+                                           stst += pp
+                                           flag3 = 1
+
+                                    stst = stst.split(':')
+                                    op =  stst[2]
+                                    op = str(op)
+                                    if( "Not authorized." in op ):
+                                        flag2 = 1
+                                        yocheck = 1
+                                        outputt.write("-1" + "," + "-1" + "," + "-1" + "," + "-1" + "," + "-1" + "," + "-1" + "," + "-1" + "," + "-1" + "," + "-1" + "\n")
+                                        continue
                                     print 'yo2', " ", flag2
                                     time.sleep(60)  
+                            
+                            if( yocheck==1 ):
+                                continue                             
 
                             flag2 = 0
                             while( flag2 == 0 ):
