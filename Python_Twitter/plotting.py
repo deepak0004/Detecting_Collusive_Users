@@ -8,14 +8,15 @@ import matplotlib as matpl
 from textwrap import wrap
 import sys
 
-NO_OF_USERS = 210
+NO_OF_USERS = 26
 COLUMN_CONSI = int(sys.argv[1])
 FLOATT = int(sys.argv[2])
 
 coun = 0
 mean = 0
 dictt = {}
-filee = open('plotting_data2.txt', 'r')
+#filee = open('plotting_data2.txt', 'r')
+filee = open('plotting_datasmall.txt', 'r')
 
 def func( val ):
     if( FLOATT==1 ):
