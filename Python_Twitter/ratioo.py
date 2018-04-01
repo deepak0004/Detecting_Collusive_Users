@@ -4,7 +4,21 @@ import sys
 from Object import *
 from twitter import *
 import unicodedata
-import json
+import jso
+
+def edit_distance(s1, s2):
+    m=len(s1)+1
+    n=len(s2)+1
+
+    tbl = {}
+    for i in range(m): tbl[i,0]=i
+    for j in range(n): tbl[0,j]=j
+    for i in range(1, m):
+        for j in range(1, n):
+            cost = 0 if s1[i-1] == s2[j-1] else 1
+            tbl[i,j] = min(tbl[i, j-1]+1, tbl[i-1, j]+1, tbl[i-1, j-1]+cost)
+
+    return tbl[i,j]
 
 st = sys.argv[1]
 timeinterval = int(sys.argv[2])
@@ -118,6 +132,13 @@ while(1):
                                 else:
                                    tweet += 1 
 
+                            tweets_edit = 0 
+                            for obj in mapp_username_list[ username ]:
+                            	for obj2 in mapp_username_list[ username ]:
+                            		if( edit_distance(obj["text"], obj2["text"]) >= 5 ):
+                                        tweets_edit += 1
+
+                            tweets_edit /= 2
                             fri = user["friends_count"]
                             foll = user["followers_count"] 
                             ratio =  "%.10f" %  ( float(foll) / (fri + foll) )
@@ -126,15 +147,15 @@ while(1):
                                 tweet_retweet = "%.10f" % ( float(retweet) / tweet )
                             else:
                                 tweet_retweet = 0 
-     
+
                             #print 'reached here 3'
                             print str(user["friends_count"]) + "," + str(user["followers_count"]) + ",", 
                             #print 'reached here 4'
                             print str(ratio) + "," + str(user["favourites_count"]) + ",",
                             print str(user["statuses_count"]) + "," + str(user["verified"]), ",",
-                            print str(noofurl) + "," + str(retweet), ",", str(fri_comm), ",", str(tweet_retweet)
+                            print str(noofurl) + "," + str(retweet), ",", str(fri_comm), ",", str(tweet_retweet), ",", str(tweets_edit)
 
-                            outputt.write(str(user["friends_count"]) + "," + str(user["followers_count"]) + "," + str(ratio) + "," + str(user["favourites_count"]) + "," + str(user["statuses_count"]) + "," + str(user["verified"]) + "," + str(noofurl) + "," + str(retweet) + "," + str(fri_comm) + "," + str(tweet_retweet) + "\n")
+                            outputt.write(str(user["friends_count"]) + "," + str(user["followers_count"]) + "," + str(ratio) + "," + str(user["favourites_count"]) + "," + str(user["statuses_count"]) + "," + str(user["verified"]) + "," + str(noofurl) + "," + str(retweet) + "," + str(fri_comm) + "," + str(tweet_retweet) + "," + str(tweets_edit) + "\n")
                 except TwitterError as e:
                     stst = ''
                     flag3 = 0
@@ -148,7 +169,7 @@ while(1):
                     print op
                     if( op == "17" ):
                         flag = 1
-                        outputt.write("-1" + "," + "-1" + "," + "-1" + "," + "-1" + "," + "-1" + "," + "-1" + "," + "-1" + "," + "-1" + "," + "-1" + "\n")
+                        outputt.write("-1" + "," + "-1" + "," + "-1" + "," + "-1" + "," + "-1" + "," + "-1" + "," + "-1" + "," + "-1" + "," + "-1" + "," + "-1" + "\n")
                         continue
                     print 'yo', " ", flag
                     time.sleep(60)
