@@ -4,3 +4,6 @@ class Object:
 		self.tweet_text = tweet_text
 		self.favorite_count = favorite_count
 		self.retweet_count = retweet_count
+
+	def gettextt(self):
+		return self.tweet_text

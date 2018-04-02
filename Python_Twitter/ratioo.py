@@ -4,7 +4,7 @@ import sys
 from Object import *
 from twitter import *
 import unicodedata
-import jso
+import json
 
 def edit_distance(s1, s2):
     m=len(s1)+1
@@ -134,8 +134,8 @@ while(1):
 
                             tweets_edit = 0 
                             for obj in mapp_username_list[ username ]:
-                            	for obj2 in mapp_username_list[ username ]:
-                            		if( edit_distance(obj["text"], obj2["text"]) >= 5 ):
+                                for obj2 in mapp_username_list[ username ]:
+                                    if( edit_distance(obj.gettextt(), obj2.gettextt()) >= 5 ):
                                         tweets_edit += 1
 
                             tweets_edit /= 2
@@ -175,6 +175,3 @@ while(1):
                     time.sleep(60)
     
     time.sleep(timeinterval)
-
-with open("user_and_who_retweeted.dump", "wb") as fp:   #Pickling
-    pickle.dump(mapp_username_list, fp)

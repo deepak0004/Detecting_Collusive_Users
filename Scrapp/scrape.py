@@ -12,7 +12,8 @@ for line in inputt:
     us_list.append(us) 
 
 delay = 1  # time to wait on each page load before reading the page
-driver = webdriver.Chrome('/home/deepak/Desktop/Sub/IP/twitter_scraping/chromedriver')  # options are Chrome() Firefox() Safari()
+#driver = webdriver.Chrome('/home/deepak/Desktop/Sub/IP/twitter_scraping/chromedriver')  # options are Chrome() Firefox() Safari()
+driver = webdriver.Firefox()  # options are Chrome() Firefox() Safari()
 
 start = datetime.datetime(2018, 2, 28)  # year, month, day
 end = datetime.datetime(2018, 3, 1)  # year, month, day
