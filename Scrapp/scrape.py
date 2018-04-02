@@ -20,7 +20,6 @@ end = datetime.datetime(2018, 3, 1)  # year, month, day
 days = (end - start).days + 1
 id_selector = '.time a.tweet-timestamp'
 tweet_selector = 'li.js-stream-item'
-ids = []
 
 def format_day(date):
     day = '0' + str(date.day) if len(str(date.day)) == 1 else str(date.day)
@@ -37,6 +36,7 @@ def increment_day(date, i):
     return date + datetime.timedelta(days=i)
 
 for user in us_list:
+        ids = []
         start = datetime.datetime(2018, 2, 28)  # year, month, day
         end = datetime.datetime(2018, 3, 1)     # year, month, day
 
