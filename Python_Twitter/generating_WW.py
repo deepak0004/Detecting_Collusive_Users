@@ -16,10 +16,18 @@ usercust = []
 us_list = []
 dictt = {}
 
-inputt = open('tweet_links.txt', 'r')
-for line in inputt:
-    us = str(line) 
-    us_list.append(us) 
+with open("userveri.dump", "rb") as fp:   # Unpickling
+    userveri = pickle.load(fp)
+
+with open("usercust.dump", "rb") as fp:   # Unpickling
+    usercust = pickle.load(fp)
+
+with open("dictt.dump", "rb") as fp:   # Unpickling
+    dictt = pickle.load(fp)
+
+userss = userveri
+users.extend(usercust)
+WW = np.zeros(shape=(6000, 6000)) 
 
 for username in us_list:
         username = username.strip() 
@@ -70,6 +78,7 @@ for username in us_list:
                        flag3 = 1
 
                 stst = stst.split(':')
+                print stst
                 if( len(stst)>=3 ):
                     op =  stst[3][1] + stst[3][2]
                     print op
@@ -116,6 +125,7 @@ for username in us_list:
                        flag3 = 1
 
                 stst = stst.split(':')
+                print stst
                 if( len(stst)>=3 ):
 	                op =  stst[3][1] + stst[3][2]
 	                print op
