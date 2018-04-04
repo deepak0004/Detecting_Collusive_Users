@@ -22,6 +22,9 @@ with open("userveri.dump", "rb") as fp:   # Unpickling
 with open("usercust.dump", "rb") as fp:   # Unpickling
     usercust = pickle.load(fp)
 
+with open("dictt.dump", "rb") as fp:   # Unpickling
+    dictt = pickle.load(fp)
+
 userss = userveri
 users.extend(usercust)
 WW = np.zeros(shape=(6000, 6000))
@@ -35,7 +38,8 @@ for i in range( len(userveri) ):
 for us1 in range( len(users) ):
    for us2 in range( len(users) ):
       if( us1!=us2 ):
-          WW[us1][us2] = op
+        if( us2 in dictt[us1] ):
+           WW[us1][us2] = 1
     
 with open("WW.dump", "wb") as fp:  
     pickle.dump(WW, fp)    
