@@ -60,15 +60,11 @@ iterr = 10
 for i in range( len(userveri) ):
     PV[i] = 1
 
-for us1 in range( len(users) ):
-   for us2 in range( len(users) ):
-      if( us1!=us2 ): 
-            name1, name2 = func(us1, us2)
-            if( name1 in dictt[name2] ):
-                  WW[us1][us2] = 1
-    
-with open("WW.dump", "wb") as fp:  
-    pickle.dump(WW, fp)    
+with open("WW.dump", "rb") as fp:   # Unpickling
+    WW = pickle.load(fp)
+
+if( 1 in WW[0] ): 
+  print 'yo'
 
 WW = np.array(WW)
 PC = np.array(PC)

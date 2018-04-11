@@ -5,7 +5,11 @@ from Object import *
 from twitter import *
 import unicodedata
 import json
+import numpy as np
 
+num = int(sys.argv[4])
+lowerb = int(sys.argv[2])
+upperb = int(sys.argv[3])
 st = sys.argv[1]
 print st
 config = {}
@@ -22,27 +26,28 @@ with open("userveri.dump", "rb") as fp:   # Unpickling
 with open("usercust.dump", "rb") as fp:   # Unpickling
     usercust = pickle.load(fp)
 
-with open("dictt.dump", "rb") as fp:   # Unpickling
-    dictt = pickle.load(fp)
-
 userss = userveri
-users.extend(usercust)
+dictt = {}
+userss.extend(usercust)
 WW = np.zeros(shape=(6000, 6000)) 
 
-for username in us_list:
-        username = username.strip() 
-        username = username.strip('\n')
-        username = username.split('/')
-        username = username[3]
-        print username
-        usercust.append(username)
-        dictt[username] = []
+usercust = usercust[:2000]
+userveri = userveri[:4000]
 
+coun = 0
+for username in userss:
+        coun += 1
+        print coun
+        if( coun<=lowerb ):
+            continue
+        if( coun>=upperb ):
+            continue
+        dictt[username] = []
         flag = 0
         while( flag == 0 ):
             query = []
             try:
-                query = twitter.friends.ids(screen_name = username, count = 2000)
+                query = twitter.friends.ids(screen_name = username, count = 1000)
                 flag = 1
         
                 for n in range(0, len(query["ids"]), 98):
@@ -56,12 +61,7 @@ for username in us_list:
                             subquery = twitter.users.lookup(user_id = ids)
                             flag2 = 1
                             for user in subquery:
-                            	 #print user["verified"]
-                                 if( str(user["verified"])=="True" ):
-                                    userveri.append( str(user["screen_name"]) )
-                                 else:
-                                    usercust.append( str(user["screen_name"]) )
-                                 #dictt[username].append( str(user["screen_name"]) )
+                            	 dictt[username].append( str(user["screen_name"]) )
                         except Exception as e:
                             print e
                             print 'yo2'
@@ -79,7 +79,7 @@ for username in us_list:
 
                 stst = stst.split(':')
                 print stst
-                if( len(stst)>=3 ):
+                if( len(stst)>=4 ):
                     op =  stst[3][1] + stst[3][2]
                     print op
                     if( op == "88" ):
@@ -90,7 +90,7 @@ for username in us_list:
         flag = 0
         while( flag == 0 ):
             try:
-                query = twitter.followers.ids(screen_name = username, count = 2000)
+                query = twitter.followers.ids(screen_name = username, count = 1000)
                 flag = 1
 
                 for n in range(0, len(query["ids"]), 98):
@@ -104,12 +104,7 @@ for username in us_list:
                             subquery = twitter.users.lookup(user_id = ids)
                             flag2 = 1
                             for user in subquery:	
-                            	 #print user["verified"] 
-                                 if( str(user["verified"])=="True" ):
-                                    userveri.append( str(user["screen_name"]) )
-                                 else:
-                                    usercust.append( str(user["screen_name"]) )
-                                 #dictt[username].append( str(user["screen_name"]) )
+                                dictt[username].append( str(user["screen_name"]) )
                         except Exception as e:
                             print e
                             print 'yo4'
@@ -125,8 +120,8 @@ for username in us_list:
                        flag3 = 1
 
                 stst = stst.split(':')
-                print stst
-                if( len(stst)>=3 ):
+                print stst  
+                if( len(stst)>=4 ):
 	                op =  stst[3][1] + stst[3][2]
 	                print op
 	                if( op == "88" ):
@@ -135,11 +130,5 @@ for username in us_list:
                 flag = 1
         print len(userveri), "    ", len(usercust)
 
-with open("userveri.dump", "wb") as fp:  
-    pickle.dump(userveri, fp)
-    
-with open("usercust.dump", "wb") as fp: 
-    pickle.dump(usercust, fp)
-
-#with open("dictt.dump", "wb") as fp: 
-#    pickle.dump(dictt, fp)
+with open('dictt' + str(num) + '.dump', "wb") as fp: 
+    pickle.dump(dictt, fp)

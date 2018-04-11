@@ -70,7 +70,8 @@ for username in us_list:
                        flag3 = 1
 
                 stst = stst.split(':')
-                if( len(stst)>=3 ):
+                print len(stst)  
+                if( len(stst)>=4 ):
                     op =  stst[3][1] + stst[3][2]
                     print op
                     if( op == "88" ):
@@ -116,7 +117,8 @@ for username in us_list:
                        flag3 = 1
 
                 stst = stst.split(':')
-                if( len(stst)>=3 ):
+                print len(stst)  
+                if( len(stst)>=4 ):
 	                op =  stst[3][1] + stst[3][2]
 	                print op
 	                if( op == "88" ):

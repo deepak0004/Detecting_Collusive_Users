@@ -73,7 +73,7 @@ while(1):
                             flag2 = 0
                             while( flag2 == 0 ):
                                 try:
-                                    results = twitter.statuses.user_timeline(screen_name = user["screen_name"], count = 2000)
+                                    results = twitter.statuses.user_timeline(screen_name = user["screen_name"], count = 200)
                                     flag2 = 1
                                 except Exception as e:
                                     stst = ''
@@ -100,7 +100,7 @@ while(1):
                             flag2 = 0
                             while( flag2 == 0 ):
                                 try:
-                                    queryy = twitter.friends.ids(screen_name = user["screen_name"], count = 2000)
+                                    queryy = twitter.friends.ids(screen_name = user["screen_name"], count = 5000)
                                     flag2 = 1
                                     #print 'bhaibhai'
                                     if( user["screen_name"] in dictt2 ):
@@ -114,16 +114,17 @@ while(1):
                                     print 'yo3', " ", flag2
                                     time.sleep(60)                       
 
+                            mapp_username_list[ username ] = []
                             #print results
                             for status in results:
                                 #print status["text"]
                                 status["text"] = unicodedata.normalize('NFKD', status["text"]).encode('ascii','ignore')
                                 obj = Object(str(status["id"]), status["text"], str(status["favorite_count"]), str(status["retweet_count"]))
                                 #print 'reached here1'
-                                if( username in mapp_username_list ):
-                                   mapp_username_list[ username ].append( obj ) 
-                                else:
-                                   mapp_username_list[ username ] = [obj]
+                                #if( username in mapp_username_list ):
+                                mapp_username_list[ username ].append( obj ) 
+                                #else:
+                                #mapp_username_list[ username ] = [obj]
                                 if( ("http" in status["text"]) or ("www." in status["text"]) ):
                                    noofurl += 1
                                 #print 'reached here2'
@@ -132,11 +133,12 @@ while(1):
                                 else:
                                    tweet += 1 
 
-                            tweets_edit = 0 
-                            for obj in mapp_username_list[ username ]:
-                                for obj2 in mapp_username_list[ username ]:
-                                    if( edit_distance(obj.gettextt(), obj2.gettextt()) >= 5 ):
-                                        tweets_edit += 1
+                            tweets_edit = 0
+                            if( len(mapp_username_list[ username ]) ):  
+	                        for obj in mapp_username_list[ username ]:
+        	                    for obj2 in mapp_username_list[ username ]:
+                	                if( edit_distance(obj.gettextt(), obj2.gettextt()) >= 5 ):
+                                           tweets_edit += 1
 
                             tweets_edit /= 2
                             fri = user["friends_count"]
