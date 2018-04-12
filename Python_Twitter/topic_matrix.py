@@ -12,15 +12,19 @@ from scipy.spatial.distance import cdist
 from scipy.spatial import distance
 
 dictt = {}
-No_Of_Users = 10
-total_topics = 100
+No_Of_Users = 330
+total_topics = 1000
+def jaccard_similarity(x, y):
+    intersection_cardinality = len(set.intersection(*[set(x), set(y)]))
+    union_cardinality = len(set.union(*[set(x), set(y)]))
+    return intersection_cardinality/float(union_cardinality)
 def display_topics(model, feature_names, no_top_words):
     global dictt
     for topic_idx, topic in enumerate(model.components_):
         dictt[topic_idx] = []
         for i in topic.argsort()[:-no_top_words - 1:-1]:
             dictt[topic_idx].append(feature_names[i])
-        print '##########', topic_idx, '##########'
+        #print '##########', topic_idx, '##########'
 def display_topics2(model, feature_names, no_top_words):
     oioi = []
     for topic_idx, topic in enumerate(model.components_):
@@ -154,7 +158,7 @@ for username in us_list:
         if( len(results)==0 ):
             continue
         results = textobt(results)
-        topicmodeluser = topiclda(results, 1, 10)
+        topicmodeluser = topiclda(results, 5, 10)
         #print topicmodeluser
         flag = 0
         while( flag == 0 ):
@@ -195,24 +199,26 @@ for username in us_list:
                     
                     if( len(results)!=0 ):
               	        results = textobt(results)
-                        topmodelfri = topiclda(results, 1, 10)
+                        topmodelfri = topiclda(results, 5, 10)
                         print 'Topic:::::: ', topmodelfri
                         if( coun<No_Of_Users ):
                             for i in range(total_topics):
                               for j in range(total_topics):
-                                 flagx1 = intersec(dictt[i], topicmodeluser)
-                                 flagx2 = intersec(dictt[j], topmodelfri)
-                                 if( flagx1==1 and flagx2==1 ):
-                                    print 'yozzzzzzzzz'
-                                    mat1[i][j] += (1/100.0)
+                                for k in range(5):
+                                     flagx1 = jaccard_similarity(dictt[i], topicmodeluser[k])
+                                     flagx2 = jaccard_similarity(dictt[j], topmodelfri[k])
+                                     if( flagx1>=0.0001 and flagx2>=0.0001 ):
+                                        print 'yozzzzzzzzz'
+                                        mat1[i][j] += 1
                         else:
                             for i in range(total_topics):
                               for j in range(total_topics):
-                                 flagx1 = intersec(dictt[i], topicmodeluser)
-                                 flagx2 = intersec(dictt[j], topmodelfri)
-                                 if( flagx1==1 and flagx2==1 ):
-                                    print 'yozzzzzzzzz'
-                                    mat2[i][j] += (1/100.0)
+                                for k in range(5):                                
+                                     flagx1 = intersec(dictt[i], topicmodeluser[k])
+                                     flagx2 = intersec(dictt[j], topmodelfri[k])
+                                     if( flagx1>=0.0001 and flagx2>=0.0001 ):
+                                        print 'yozzzzzzzzz'
+                                        mat2[i][j] += 1
 
             except TwitterError as e:
                 print e
