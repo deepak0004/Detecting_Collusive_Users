@@ -26,11 +26,12 @@ def display_topics(model, feature_names, no_top_words):
             dictt[topic_idx].append(feature_names[i])
         #print '##########', topic_idx, '##########'
 def display_topics2(model, feature_names, no_top_words):
-    oioi = []
+    dictt2 = {}
     for topic_idx, topic in enumerate(model.components_):
+        dictt2[topic_idx] = []
         for i in topic.argsort()[:-no_top_words - 1:-1]:
-            oioi.append(feature_names[i])
-    return oioi
+            dictt2[topic_idx].append(feature_names[i])
+    return dictt2
 def topiclda(X, no_topics, no_top_words):
     no_features = 1000
     # LDA can only use raw term counts for LDA because it is a probabilistic graphical model
@@ -176,7 +177,7 @@ for username in us_list:
                         try:
                             #print ids
                             results = twitter.statuses.user_timeline(user_id = ids, count = 100)
-                            #	print results
+                            #print results
                             flag2 = 1
                         except Exception as e:
                             print e
