@@ -192,7 +192,7 @@ for username in us_list:
         if( len(results)==0 ):
             continue
         results = textobt(results)
-        results.append('x')
+        results.append('The world is great')
         topicmodeluser = topiclda(results, 5, 10)
         #print 'Topic:::::: ', topicmodeluser
         for i in range(total_topics):
@@ -244,7 +244,7 @@ for username in us_list:
                     
                     if( len(results)!=0 ):
                         results = textobt(results)
-                        results.append('x')
+                        results.append('The world is great')
                         topmodelfri = topiclda(results, 5, 10)
                         #print 'Topic:::::: ', topmodelfri
                         for i in range(total_topics):
