@@ -35,7 +35,7 @@ def display_topics2(model, feature_names, no_top_words):
 def topiclda(X, no_topics, no_top_words):
     no_features = 1000
     # LDA can only use raw term counts for LDA because it is a probabilistic graphical model
-    tf_vectorizer = CountVectorizer(max_df=2, min_df=1, max_features=no_features, stop_words='english')
+    tf_vectorizer = CountVectorizer(max_df=1.0, min_df=1, max_features=no_features, stop_words='english')
     tf = tf_vectorizer.fit_transform(X)
     tf_feature_names = tf_vectorizer.get_feature_names()
     # Run LDA
@@ -115,7 +115,7 @@ for username in us_list:
 #print '############################################################'
 no_features = 1000
 # LDA can only use raw term counts for LDA because it is a probabilistic graphical model
-tf_vectorizer = CountVectorizer(max_df=2, min_df=1, max_features=no_features, stop_words='english')
+tf_vectorizer = CountVectorizer(max_df=1.0, min_df=1, max_features=no_features, stop_words='english')
 tf = tf_vectorizer.fit_transform(all_data_of_checked_users)
 tf_feature_names = tf_vectorizer.get_feature_names()
 no_topics = total_topics
@@ -159,6 +159,7 @@ for username in us_list:
         if( len(results)==0 ):
             continue
         results = textobt(results)
+        results.append('The world is great')
         topicmodeluser = topiclda(results, 5, 10)
         #print topicmodeluser
         flag = 0
@@ -200,6 +201,7 @@ for username in us_list:
                     
                     if( len(results)!=0 ):
               	        results = textobt(results)
+                        results.append('The world is great')
                         topmodelfri = topiclda(results, 5, 10)
                         print 'Topic:::::: ', topmodelfri
                         if( coun<No_Of_Users ):
