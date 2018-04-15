@@ -101,7 +101,7 @@ inputt = open('tweet_links2.txt', 'r')
 for line in inputt:
     us = str(line) 
     us_list.append(us) 
-
+'''
 for username in us_list:
     username = username.strip() 
     username = username.strip('\n')
@@ -275,7 +275,7 @@ for username in us_list:
                         continue
                 flag = 1
         coun += 1
-
+'''
 coun = 0
 for username in us_list:
         username = username.strip() 
@@ -368,8 +368,8 @@ for i in range(No_Of_Users):
       o3 = user_tweet[i]
       o4 = user_tweet[j]
 
-      aa = abs(o1-o2)
-      bb = abs(o3-o4)
+      aa = abs(float(o1)-float(o2))
+      bb = abs(float(o3)-float(o4))
 
       o1 = math.exp( -aa )
       o2 = math.exp( -bb )
@@ -419,7 +419,7 @@ anss = 0
 print anss
 
 for i in range(len(yx)):
-    if( dictt[yx[0][1]] < cust_users ):
+    if( yx[0][1] < cust_users ):
         anss += 1
 
 print( anss/float(No_Of_Users) )
