@@ -192,6 +192,7 @@ for username in us_list:
         if( len(results)==0 ):
             continue
         results = textobt(results)
+        results.append('x')
         topicmodeluser = topiclda(results, 5, 10)
         #print 'Topic:::::: ', topicmodeluser
         for i in range(total_topics):
@@ -243,6 +244,7 @@ for username in us_list:
                     
                     if( len(results)!=0 ):
                         results = textobt(results)
+                        results.append('x')
                         topmodelfri = topiclda(results, 5, 10)
                         #print 'Topic:::::: ', topmodelfri
                         for i in range(total_topics):
@@ -369,7 +371,11 @@ for i in range(No_Of_Users):
       aa = abs(o1-o2)
       bb = abs(o3-o4)
 
+      o1 = math.exp( -aa )
+      o2 = math.exp( -bb )
       
+      alphac[i][j] = o1
+      alphag[i][j] = o2
 
 for i in range(iterr):    
     user_mat = np.zeros(shape=(No_Of_Users, latent_leng))
