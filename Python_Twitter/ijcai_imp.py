@@ -101,7 +101,7 @@ inputt = open('tweet_links2.txt', 'r')
 for line in inputt:
     us = str(line) 
     us_list.append(us) 
-'''
+
 for username in us_list:
     username = username.strip() 
     username = username.strip('\n')
@@ -275,7 +275,7 @@ for username in us_list:
                         continue
                 flag = 1
         coun += 1
-'''
+
 coun = 0
 for username in us_list:
         username = username.strip() 
