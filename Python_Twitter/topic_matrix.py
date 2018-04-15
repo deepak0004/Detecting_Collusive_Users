@@ -209,7 +209,7 @@ for username in us_list:
                                      flagx1 = jaccard_similarity(dictt[i], topicmodeluser[k])
                                      flagx2 = jaccard_similarity(dictt[j], topmodelfri[k])
                                      if( flagx1>=0.0001 and flagx2>=0.0001 ):
-                                        print 'yozzzzzzzzz'
+                                        #print 'yozzzzzzzzz'
                                         mat1[i][j] += 1
                         else:
                             for i in range(total_topics):
@@ -218,7 +218,7 @@ for username in us_list:
                                      flagx1 = intersec(dictt[i], topicmodeluser[k])
                                      flagx2 = intersec(dictt[j], topmodelfri[k])
                                      if( flagx1>=0.0001 and flagx2>=0.0001 ):
-                                        print 'yozzzzzzzzz'
+                                        #print 'yozzzzzzzzz'
                                         mat2[i][j] += 1
 
             except TwitterError as e:
