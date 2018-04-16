@@ -12,6 +12,7 @@ from sklearn.decomposition import NMF, LatentDirichletAllocation
 from scipy.spatial.distance import cdist
 from scipy.spatial import distance
 import math
+import random
 
 all_data_of_checked_users = []
 dictt = {}
@@ -34,8 +35,8 @@ alphac = np.zeros(shape=(No_Of_Users, No_Of_Users))
 alphag = np.zeros(shape=(No_Of_Users, No_Of_Users))
 simimat = np.zeros(shape=(No_Of_Users, No_Of_Users))
 maxxmat = np.zeros(shape=(No_Of_Users, 1))
-learnedu = np.zeros(shape=(No_Of_Users, latent_leng)) 
-learnedt = np.zeros(shape=(total_topics, latent_leng)) 
+learnedu = np.random.rand(No_Of_Users, latent_leng) 
+learnedt = np.random.rand(total_topics, latent_leng) 
 
 st = sys.argv[1]
 print st
