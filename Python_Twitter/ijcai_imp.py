@@ -101,7 +101,7 @@ inputt = open('tweet_links2.txt', 'r')
 for line in inputt:
     us = str(line) 
     us_list.append(us) 
-'''
+
 for username in us_list:
     username = username.strip() 
     username = username.strip('\n')
@@ -280,7 +280,7 @@ with open('matu_t.dump', "wb") as fp:
     pickle.dump(matu_t, fp)
 with open('matu_f.dump', "wb") as fp: 
     pickle.dump(matu_t, fp)
-'''
+
 
 coun = 0
 for username in us_list:
