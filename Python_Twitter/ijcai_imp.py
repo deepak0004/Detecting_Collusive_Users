@@ -101,7 +101,7 @@ inputt = open('tweet_links2.txt', 'r')
 for line in inputt:
     us = str(line) 
     us_list.append(us) 
-
+'''
 for username in us_list:
     username = username.strip() 
     username = username.strip('\n')
@@ -276,6 +276,12 @@ for username in us_list:
                 flag = 1
         coun += 1
 
+with open('matu_t.dump', "wb") as fp: 
+    pickle.dump(matu_t, fp)
+with open('matu_f.dump', "wb") as fp: 
+    pickle.dump(matu_t, fp)
+'''
+
 coun = 0
 for username in us_list:
         username = username.strip() 
@@ -377,6 +383,11 @@ for i in range(No_Of_Users):
       alphac[i][j] = o1
       alphag[i][j] = o2
 
+with open('alphac.dump', "wb") as fp: 
+    pickle.dump(alphac, fp)
+with open('alphag.dump', "wb") as fp: 
+    pickle.dump(alphag, fp)
+
 for i in range(iterr):    
     user_mat = np.zeros(shape=(No_Of_Users, latent_leng))
     user_mat2 = np.zeros(shape=(No_Of_Users, latent_leng))
@@ -413,13 +424,19 @@ for i in range(No_Of_Users):
     maxxmat[i] = maxx(simimat[i])
     labell.append(i)
 
+with open('maxxmat.dump', "wb") as fp: 
+    pickle.dump(maxxmat, fp)
+
 yx = zip(maxxmat, labell)
 yx.sort(reverse=True)
 anss = 0
-print anss
+#print yx
 
 for i in range(len(yx)):
-    if( yx[0][1] < cust_users ):
-        anss += 1
+    if( i<10 ):
+        #print yx[i][1]
+        if( yx[i][1] < cust_users ):
+            anss += 1
 
-print( anss/float(No_Of_Users) )
+print( float(anss)/50.0 )
+
