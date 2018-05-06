@@ -82,8 +82,8 @@ def frob(i, j):
    o2 = learnedu[j]
    anss = 0
    for p in range(latent_leng):
-       anss += abs( (o1[p] - o2[p])*(o1[p] - o2[p]) )
-   anss = (1/(1+anss))
+       anss += abs( float(o1[p] - o2[p])*(o1[p] - o2[p]) )
+   anss = (1.0/(1+anss))
    return anss
 def maxx(vect):
    ko = 0
