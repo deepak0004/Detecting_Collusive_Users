@@ -91,7 +91,7 @@ for username in us_list:
             stst = stst.split(':')
             op =  stst[3][1] + stst[3][2]
             print op
-            if( op == "88" ):
+            if( op == "17" ):
                 flag2 = 1
                 continue
             print 'yo', " ", flag
@@ -114,7 +114,7 @@ for username in us_list:
             stst = stst.split(':')
             op =  stst[3][1] + stst[3][2]
             print op
-            if( op == "88" ):
+            if( op == "17" ):
                 flag2 = 1
                 continue
             print 'yo', " ", flag
@@ -146,7 +146,7 @@ for username in us_list:
                 stst = stst.split(':')
                 op =  stst[3][1] + stst[3][2]
                 print op
-                if( op == "88" ):
+                if( op == "17" ):
                     flag2 = 1
                     continue
                 print 'yo', " ", flag
