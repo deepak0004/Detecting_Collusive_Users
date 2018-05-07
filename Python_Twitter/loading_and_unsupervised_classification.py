@@ -33,6 +33,7 @@ matu_f = np.zeros(shape=(No_Of_Users, total_topics))
 matu_t = np.zeros(shape=(No_Of_Users, total_topics)) 
 alphac = np.zeros(shape=(No_Of_Users, No_Of_Users))
 alphag = np.zeros(shape=(No_Of_Users, No_Of_Users))
+alphak = np.zeros(shape=(No_Of_Users, No_Of_Users))
 simimat = np.zeros(shape=(No_Of_Users, No_Of_Users))
 maxxmat = np.zeros(shape=(No_Of_Users, 1))
 learnedu = np.random.rand(No_Of_Users, latent_leng) 
@@ -76,6 +77,12 @@ def diff2(i, j):
    o2 = learnedu[j]
    subb = o1 - o2
    subb = (alphag[i][j]*subb)
+   return subb
+def diff3(i, j):
+   o1 = learnedu[i]
+   o2 = learnedu[j]
+   subb = o1 - o2
+   subb = (alphak[i][j]*subb)
    return subb
 def frob(i, j):
    o1 = learnedu[i]
@@ -281,121 +288,51 @@ with open('matu_t.dump', "wb") as fp:
     pickle.dump(matu_t, fp)
 with open('matu_f.dump', "wb") as fp: 
     pickle.dump(matu_t, fp)
-
-
-coun = 0
-for username in us_list:
-        username = username.strip() 
-        username = username.strip('\n')
-        username = username.split('/')
-        username = username[3]
-
-        flag = 0
-        while( flag == 0 ):
-            try:
-                #print 'io'
-                print username
-                query = twitter.users.lookup( screen_name=username ) 
-                #print 'po'
-                flag = 1
-                retweet = 0
-                inter = 0
-                tweet = 0
-
-                for user in query:
-                        print user["screen_name"]
-                        flag2 = 0
-                        while( flag2 == 0 ):
-                            try:
-                                results = twitter.statuses.user_timeline(screen_name = user["screen_name"], count = 2000)
-                                flag2 = 1
-                            except Exception as e:
-                                print e
-                                print 'yo2'
-                                stst = ''
-                                flag3 = 0
-                                for pp in e[0]:
-                                    if( pp=='{' or flag3 == 1 ):
-                                       stst += pp
-                                       flag3 = 1
-
-                                stst = stst.split(':')
-                                if( len(stst)>=4 ):
-                                    op =  stst[3][1] + stst[3][2]
-                                    print op
-                                    if( op == "88" ):
-                                        print 'waitingx2'
-                                        time.sleep(60)
-                                        continue
-                                flag2 = 1
-                        
-                        flag2 = 0
-                        for status in results:
-                            status["text"] = unicodedata.normalize('NFKD', status["text"]).encode('ascii','ignore')
-                            obj = Object(str(status["id"]), status["text"], str(status["favorite_count"]), str(status["retweet_count"]))
-                            if( int(status["retweeted"])==1 ):
-                               retweet += 1
-                            tweet += 1 
-
-                        fri = user["friends_count"]
-                        foll = user["followers_count"] 
-                        ratio =  "%.10f" %  ( float(foll) / (fri + foll) )
-                        if( tweet>0 ):
-                            tweet_retweet = "%.10f" % ( float(retweet) / tweet )
-                        else:
-                            tweet_retweet = 0 
-                        
-                        user_friratio[coun] = ratio
-                        user_tweet[coun] = tweet_retweet
-            except TwitterError as e:
-                print e
-                print 'yo1'
-                stst = ''
-                flag3 = 0
-                for pp in e[0]:
-                    if( pp=='{' or flag3 == 1 ):
-                       stst += pp
-                       flag3 = 1
-
-                stst = stst.split(':')
-                if( len(stst)>=4 ):
-                    op =  stst[3][1] + stst[3][2]
-                    print op
-                    if( op == "88" ):
-                        print 'waitingx1'
-                        time.sleep(60)
-                        continue
-                flag = 1
-            coun += 1
+with open("retweet_tweet_dictt.dump", "rb") as fp:  
+    retweet_tweet_dictt = pickle.load(fp)
+with open("mapp_username_list.dump", "rb") as fp:  
+    mapp_username_list = pickle.load(fp)
+with open("dictt_retweet_follo.dump", "rb") as fp:  
+    dictt_retweet_follo = pickle.load(fp)
 
 for i in range(No_Of_Users):
     for j in range(No_Of_Users):
-      o1 = user_friratio[i]
-      o2 = user_friratio[j]
-      o3 = user_tweet[i]
-      o4 = user_tweet[j]
+      o1 = retweet_tweet_dictt[i]
+      o2 = retweet_tweet_dictt[j]
+      o3 = mapp_username_list[i]
+      o4 = mapp_username_list[j]
+      o5 = dictt_retweet_follo[i]
+      o6 = dictt_retweet_follo[j]
 
-      aa = abs(float(o1)-float(o2))
-      bb = abs(float(o3)-float(o4))
+      aa = 1.0 - min(o1, o2)
+      bb = 1.0 - min(o3, o4)
+      cc = max(o5, o6)
 
-      o1 = math.exp( -aa )
-      o2 = math.exp( -bb )
+      o1 = 1.0 - math.exp( -aa )
+      o2 = 1.0 - math.exp( -bb )
+      o3 = math.exp( -cc )
       
       alphac[i][j] = o1
       alphag[i][j] = o2
+      alphak[i][j] = o3
 
 with open('alphac.dump', "wb") as fp: 
     pickle.dump(alphac, fp)
 with open('alphag.dump', "wb") as fp: 
     pickle.dump(alphag, fp)
+with open('alphak.dump', "wb") as fp: 
+    pickle.dump(alphak, fp)
 
 for i in range(iterr):    
     user_mat = np.zeros(shape=(No_Of_Users, latent_leng))
     user_mat2 = np.zeros(shape=(No_Of_Users, latent_leng))
+    user_mat3 = np.zeros(shape=(No_Of_Users, latent_leng))
+
     for j in range(No_Of_Users):
         for k in range(j+1, No_Of_Users):
             user_mat[j] += diff(j, k)
             user_mat2[j] += diff2(j, k)
+            user_mat3[j] += diff3(j, k)
 
     transu = np.transpose(learnedu)
     transt = np.transpose(learnedt)
@@ -405,6 +342,7 @@ for i in range(iterr):
     firstterm = np.matmul(valuee, learnedt)       # U*k      
     secondterm = user_mat[j]
     thirdterm = user_mat2[j]
+    onemore = user_mat3[j]
     fourthterm = (lambdau * learnedu)
     valueetrans = np.transpose(valuee)
     fifthterm = np.matmul(valueetrans, learnedu)  # T*k
@@ -415,8 +353,8 @@ for i in range(iterr):
     valueetrans2 = np.transpose(valuee2)
     extraav = np.matmul(valueetrans2, learnedu)
 
-    learnedu = learnedu + ( betau * ( extraau + firstterm - secondterm - thirdterm - fourthterm ) )
-    learnedt = learnedt + ( betat * ( extraav + fifthterm - sixthterm) )
+    learnedu = learnedu + ( betau * ( extraau + firstterm - secondterm - thirdterm - onemore - fourthterm ) )
+    learnedt = learnedt + ( betat * ( extraav + fifthterm - sixthterm - onemore) )
 
 labell = []
 for i in range(No_Of_Users):

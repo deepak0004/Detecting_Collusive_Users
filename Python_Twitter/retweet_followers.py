@@ -81,6 +81,7 @@ for username in us_list:
             print idsslist
         except TwitterError as e:
             print e
+            print 'yo1'
             stst = ''
             flag3 = 0
             for pp in e[0]:
@@ -89,13 +90,13 @@ for username in us_list:
                    flag3 = 1
 
             stst = stst.split(':')
-            op =  stst[3][1] + stst[3][2]
-            print op
-            if( op == "17" ):
-                flag2 = 1
-                continue
-            print 'yo', " ", flag
-            time.sleep(60)
+            if( len(stst)>=4 ):
+                op =  stst[3][1] + stst[3][2]
+                print op
+                if( op == "88" ):
+                    time.sleep(60)
+                    continue
+            flag2 = 1
 
     flag2 = 0
     while( flag2 == 0 ):
@@ -104,6 +105,7 @@ for username in us_list:
             flag2 = 1
         except TwitterError as e:
             print e
+            print 'yo1'
             stst = ''
             flag3 = 0
             for pp in e[0]:
@@ -112,47 +114,52 @@ for username in us_list:
                    flag3 = 1
 
             stst = stst.split(':')
-            op =  stst[3][1] + stst[3][2]
-            print op
-            if( op == "17" ):
-                flag2 = 1
-                continue
-            print 'yo', " ", flag
-            time.sleep(60)
-
-    #print results
-    oioip = 0
-    for status in results:
-        flag2 = 0
-        while( flag2 == 0 ):
-            try:
-                retweets = twitter.statuses.retweets._id(_id = status["id"])
-                for retweet in retweets:
-                    strr =  (retweet["user"]["id"]) 
-                    print oioip
-                    oioip += 1
-                    if( strr in idsslist ):
-                        anss += 1
-                flag2 = 1
-            except TwitterError as e:
-                print e
-                stst = ''
-                flag3 = 0
-                for pp in e[0]:
-                    if( pp=='{' or flag3 == 1 ):
-                       stst += pp
-                       flag3 = 1
-
-                stst = stst.split(':')
+            if( len(stst)>=4 ):
                 op =  stst[3][1] + stst[3][2]
                 print op
-                if( op == "17" ):
-                    flag2 = 1
+                if( op == "88" ):
+                    time.sleep(60)
                     continue
-                print 'yo', " ", flag
-                time.sleep(60)
-   
-    anss = float(anss)/100
-    print anss
+            flag2 = 1
 
+    #print results
+    if( len(results) ):
+        oioip = 0
+        for status in results:
+            flag2 = 0
+            while( flag2 == 0 ):
+                try:
+                    retweets = twitter.statuses.retweets._id(_id = status["id"])
+                    for retweet in retweets:
+                        strr =  (retweet["user"]["id"]) 
+                        #print oioip
+                        #oioip += 1
+                        if( strr in idsslist ):
+                            anss += 1
+                    flag2 = 1
+                except TwitterError as e:
+                    print e
+                    print 'yo1'
+                    stst = ''
+                    flag3 = 0
+                    for pp in e[0]:
+                        if( pp=='{' or flag3 == 1 ):
+                           stst += pp
+                           flag3 = 1
+
+                    stst = stst.split(':')
+                    if( len(stst)>=4 ):
+                        op =  stst[3][1] + stst[3][2]
+                        print op
+                        if( op == "88" ):
+                            time.sleep(60)
+                            continue
+                    flag2 = 1 
+                    
+    anss = float(anss)/len(idsslist)
     dictt_retweet_follo[username] = anss
+    print dictt_retweet_follo[username]
+
+
+with open('dictt_retweet_follo.dump', "wb") as fp:
+    pickle.dump(dictt_retweet_follo, fp)
