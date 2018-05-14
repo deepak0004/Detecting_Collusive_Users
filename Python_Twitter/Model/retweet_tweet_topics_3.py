@@ -99,7 +99,7 @@ def textobt(results):
 
 retweet_tweet_dictt = {}
 us_list = []
-inputt = open('tweet_links3.txt', 'r')
+inputt = open('tweet_links2.txt', 'r')
 for line in inputt:
     us = str(line) 
     us_list.append(us) 

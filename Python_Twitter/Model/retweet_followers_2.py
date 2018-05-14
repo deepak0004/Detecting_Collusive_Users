@@ -47,7 +47,7 @@ twitter = Twitter(auth = OAuth(config["access_key"], config["access_secret"], co
 user_follower_list = {}
 us_list = []
 dictt_retweet_follo = {}
-inputt = open('tweet_links3.txt', 'r')
+inputt = open('tweet_links2.txt', 'r')
 for line in inputt:
     us = str(line) 
     us_list.append(us) 

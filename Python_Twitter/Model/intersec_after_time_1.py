@@ -18,7 +18,7 @@ dictt = {}
 dictt2 = {}
 mapp_username_list = {}
 
-inputt = open('tweet_links3.txt', 'r')
+inputt = open('tweet_links.txt', 'r')
 for line in inputt:
     us = str(line) 
     us_list.append(us) 
