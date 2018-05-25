@@ -66,7 +66,7 @@ while(tt>0):
                             continue
                     flag2 = 1 
 
-                mapp_username_list[ username ] = len(inter)/100.0
+                mapp_username_list[ username ] = inter
     
     time.sleep(timeinterval)
 

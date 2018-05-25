@@ -5,7 +5,7 @@ map<string, int> ma;
 int main()
 {
     #ifndef  ONLINE_JUDGE
-      freopen("tweet_links2.txt", "r", stdin);
+      freopen("tweet_links.txt", "r", stdin);
     #endif
 
     string st;
