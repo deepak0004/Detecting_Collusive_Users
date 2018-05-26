@@ -58,7 +58,7 @@ def textobt(results):
     return vall
 
 us_list = []
-inputt = open('total_users.txt', 'r')
+inputt = open('total_users.text', 'r')
 for line in inputt:
     us = str(line) 
     us_list.append(us) 
