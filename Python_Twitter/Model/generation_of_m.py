@@ -20,7 +20,7 @@ history_file = "apikeys/api_history.txt"
 
 all_data_of_checked_users = []
 dictt = {}
-total_topics = 500
+total_topics = 100
 no_top_words = 10
 No_Of_Users = 1000
 #st = sys.argv[1]
@@ -58,7 +58,7 @@ def textobt(results):
     return vall
 
 us_list = []
-inputt = open('total_users.text', 'r')
+inputt = open('total_users.txt', 'r')
 for line in inputt:
     us = str(line) 
     us_list.append(us) 
@@ -78,7 +78,7 @@ for username in us_list:
         try:
             consumer_key, consumer_secret, access_key, access_secret = api_settings.populate_Settings(settings_file, history_file)
             twitter = Twitter(auth = OAuth(access_key, access_secret, consumer_key, consumer_secret))
-            results = twitter.statuses.user_timeline(screen_name = username, count = 100)
+            results = twitter.statuses.user_timeline(screen_name = username, count = 50)
             flag2 = 1
         except Exception as e:
             print e
@@ -136,7 +136,7 @@ for username in us_list:
             try:
                 consumer_key, consumer_secret, access_key, access_secret = api_settings.populate_Settings(settings_file, history_file)
                 twitter = Twitter(auth = OAuth(access_key, access_secret, consumer_key, consumer_secret))
-                query = twitter.friends.ids(screen_name = username, count = 100)
+                query = twitter.friends.ids(screen_name = username, count = 50)
                 flag = 1
         
                 for n in range(0, len(query["ids"])):
@@ -205,6 +205,6 @@ for username in us_list:
                         continue
                 flag = 1
         coun += 1
-
-with open('matu_f.dump', "wb") as fp: 
-    pickle.dump(matu_f, fp)
+        if( (coun%200)==0 ):
+	   with open('matu_f.dump', "wb") as fp: 
+    	       pickle.dump(matu_f, fp)

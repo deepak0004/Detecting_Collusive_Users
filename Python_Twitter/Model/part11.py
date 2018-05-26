@@ -27,9 +27,9 @@ for line in inputt:
     us = str(line) 
     us_list.append(us) 
 
-tt = 5
-while(tt>0):
-    tt -= 1
+tt = 0
+while(tt<3):
+    tt += 1
     for username in us_list:
             username = username.strip() 
             username = username.strip('\n')
@@ -40,11 +40,13 @@ while(tt>0):
                            
             flag2 = 0
             while( flag2 == 0 ):
-                inter = 0
+                pp = 100
+                inter = []
                 try:
                     consumer_key, consumer_secret, access_key, access_secret = api_settings.populate_Settings(settings_file, history_file)
                     twitter = Twitter(auth = OAuth(access_key, access_secret, consumer_key, consumer_secret))
-                    queryy = twitter.followers.ids(screen_name = username, count = 100)
+                    queryy = twitter.friends.ids(screen_name = username, count=100)
+                    pp = min(pp, len(queryy)) 
                     flag2 = 1
                     #print 'bhaibhai'
                     if( username in dictt2 ):
@@ -73,10 +75,11 @@ while(tt>0):
                             continue
                     flag2 = 1 
 
-                mapp_username_list[ username ] = len(inter)/100.0
-                if( username not in mapp_username_list2 ):
+                mapp_username_list[ username ] = len(inter)/float(pp) 
+                print mapp_username_list[ username ]
+                if( tt and username not in mapp_username_list2 ):
                     mapp_username_list2[ username ] = mapp_username_list[ username ]
-                else:
+                elif(tt):
                     mapp_username_list2[ username ] = min(mapp_username_list2[ username ], mapp_username_list[ username ])
     
     with open('mapp_username_list2.dump', "wb") as fp:
