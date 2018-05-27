@@ -6,20 +6,25 @@ from twitter import *
 import unicodedata
 import json
 import numpy as np
+import api_settings
 
-num = int(sys.argv[4])
-lowerb = int(sys.argv[2])
-upperb = int(sys.argv[3])
-st = sys.argv[1]
-print st
-config = {}
-execfile(st, config)
-twitter = Twitter(auth = OAuth(config["access_key"], config["access_secret"], config["consumer_key"], config["consumer_secret"]))
-userveri = []
-usercust = []
-us_list = []
+settings_file =  "apikeys/apikeys.txt"
+history_file = "apikeys/api_history.txt"
+
+#num = int(sys.argv[4])
+#lowerb = int(sys.argv[2])
+#upperb = int(sys.argv[3])
+#st = sys.argv[1]
+#print st
+#config = {}
+#execfile(st, config)
+#twitter = Twitter(auth = OAuth(config["access_key"], config["access_secret"], config["consumer_key"], config["consumer_secret"]))
+#userveri = []
+#usercust = []
+#us_list = []
 dictt = {}
 
+'''
 with open("userveri.dump", "rb") as fp:   # Unpickling
     userveri = pickle.load(fp)
 
@@ -33,15 +38,24 @@ WW = np.zeros(shape=(6000, 6000))
 
 usercust = usercust[:2000]
 userveri = userveri[:4000]
+'''
 
 coun = 0
 for username in userss:
+        '''
         coun += 1
         print coun
         if( coun<=lowerb ):
             continue
         if( coun>=upperb ):
             continue
+        '''
+        username = username.strip() 
+        username = username.strip('\n')
+        username = username.split('/')
+        username = username[3]
+        print username
+
         dictt[username] = []
         flag = 0
         while( flag == 0 ):
@@ -130,5 +144,5 @@ for username in userss:
                 flag = 1
         print len(userveri), "    ", len(usercust)
 
-with open('dictt' + str(num) + '.dump', "wb") as fp: 
+with open('dictt.dump', "wb") as fp: 
     pickle.dump(dictt, fp)
