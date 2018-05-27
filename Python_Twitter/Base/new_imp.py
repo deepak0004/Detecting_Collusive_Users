@@ -87,33 +87,36 @@ def func(us1, us2):
                 time.sleep(60)
                 continue
         flag = 1 
-    return 1
+    return 0
 
-WW = np.zeros(shape=(1000, 1000))
-PC = np.zeros(shape=(1000, 1))
-PV = np.zeros(shape=(1000, 1))
 cust = 300
 iterr = 10
-users = 1000
 us_list = []
 us_cust = []
 usercust = []
+users = 0
 
-for i in range( cust ):
-    PV[i] = 1
+cust = 5
 
-inputt = open('total_users.txt', 'r')
+inputt = open('tot3.txt', 'r')
 for line in inputt:
     us = str(line) 
     us_list.append(us) 
 
 for username in us_list:
-        username = username.strip() 
-        username = username.strip('\n')
-        username = username.split('/')
-        username = username[3]
+    users += 1
+    username = username.strip() 
+    username = username.strip('\n')
+    username = username.split('/')
+    username = username[3]
 
-        usercust.append(username)
+    usercust.append(username)
+
+WW = np.zeros(shape=(users, users))
+PC = np.zeros(shape=(users, 1))
+PV = np.zeros(shape=(users, 1))
+for i in range(cust):
+    PV[i] = 1
 
 for us1 in range( users ):
    print us1
@@ -139,25 +142,32 @@ for i in range(iterr):
     PC = np.dot(WWtemp, PV)
     PV = np.dot(WW, PC)
 
+PV = np.reshape(PV, users)
+PC = np.reshape(PC, users)
+
 indiV = np.argsort(PV)
 indiC = np.argsort(PC)
+
+print PV
+print indiV
 
 ytrue = []
 ypred = []
 ans = 0
-for i in range(1000):
-  if( i<=cust ):
-    ytrue.append(1)
-  else:
-    ytrue.append(0)
-for ind in indiV:
-    if( ind<=cust ):  
-        ans += 1
-        ypred.append(1)
+for i in range(users):
+    if( i<cust ):
+      ytrue.append(1)
     else:
-        ypred.append(0)
+      ytrue.append(0)
+for ind in indiV:
+    print ind
+    if( ind<cust ):  
+      ans += 1
+      ypred.append(1)
+    else:
+      ypred.append(0)
     
-print (ans/1000)
+print 'Ans: ', (float(ans)/users)
 
 print 'ypred ', ypred
 print 'ytrue ', ytrue
