@@ -96,9 +96,9 @@ us_cust = []
 usercust = []
 users = 0
 
-cust = 5
+#cust = 5
 
-inputt = open('tot3.txt', 'r')
+inputt = open('total_users.txt', 'r')
 for line in inputt:
     us = str(line) 
     us_list.append(us) 
