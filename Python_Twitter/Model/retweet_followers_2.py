@@ -13,46 +13,32 @@ from scipy.spatial.distance import cdist
 from scipy.spatial import distance
 import math
 import random
+import api_settings
 
-all_data_of_checked_users = []
+settings_file =  "apikeys/apikeys.txt"
+history_file = "apikeys/api_history.txt"
+
 dictt = {}
-No_Of_Users = 20
-cust_users = 10
 total_topics = 1000
-latent_leng = 10
-iterr = 100
-betau = 0.4
-betat = 0.4
-lambdau = 0.4
-lambdav = 0.4
 no_top_words = 10
 
-user_friratio = {}
-user_tweet = {}
-matu_f = np.zeros(shape=(No_Of_Users, total_topics)) 
-matu_t = np.zeros(shape=(No_Of_Users, total_topics)) 
-alphac = np.zeros(shape=(No_Of_Users, No_Of_Users))
-alphag = np.zeros(shape=(No_Of_Users, No_Of_Users))
-simimat = np.zeros(shape=(No_Of_Users, No_Of_Users))
-maxxmat = np.zeros(shape=(No_Of_Users, 1))
-learnedu = np.random.rand(No_Of_Users, latent_leng) 
-learnedt = np.random.rand(total_topics, latent_leng) 
-
-st = sys.argv[1]
-print st
-config = {}
-execfile(st, config)
-twitter = Twitter(auth = OAuth(config["access_key"], config["access_secret"], config["consumer_key"], config["consumer_secret"]))
+#st = sys.argv[1]
+#print st
+#config = {}
+#execfile(st, config)
+#twitter = Twitter(auth = OAuth(config["access_key"], config["access_secret"], config["consumer_key"], config["consumer_secret"]))
 
 user_follower_list = {}
 us_list = []
 dictt_retweet_follo = {}
-inputt = open('tweet_links2.txt', 'r')
+inputt = open('tot3.txt', 'r')
 for line in inputt:
     us = str(line) 
     us_list.append(us) 
 
+coun = 0
 for username in us_list:
+    coun += 1
     username = username.strip() 
     username = username.strip('\n')
     username = username.split('/')
@@ -68,6 +54,8 @@ for username in us_list:
     while( flag2 == 0 ):
         query = []
         try:
+            consumer_key, consumer_secret, access_key, access_secret = api_settings.populate_Settings(settings_file, history_file)
+            twitter = Twitter(auth = OAuth(access_key, access_secret, consumer_key, consumer_secret))
             query = twitter.followers.ids(screen_name = username, count = 100)
             flag2 = 1 
             coun = 0
@@ -78,7 +66,7 @@ for username in us_list:
                 coun += 1
                 if( coun>=30 ):
                     break
-            print idsslist
+            #print idsslist
         except TwitterError as e:
             print e
             print 'yo1'
@@ -101,6 +89,8 @@ for username in us_list:
     flag2 = 0
     while( flag2 == 0 ):
         try:
+            consumer_key, consumer_secret, access_key, access_secret = api_settings.populate_Settings(settings_file, history_file)
+            twitter = Twitter(auth = OAuth(access_key, access_secret, consumer_key, consumer_secret))
             results = twitter.statuses.user_timeline(screen_name = username, count = 100)
             flag2 = 1
         except TwitterError as e:
@@ -129,6 +119,8 @@ for username in us_list:
             flag2 = 0
             while( flag2 == 0 ):
                 try:
+                    consumer_key, consumer_secret, access_key, access_secret = api_settings.populate_Settings(settings_file, history_file)
+                    twitter = Twitter(auth = OAuth(access_key, access_secret, consumer_key, consumer_secret))
                     retweets = twitter.statuses.retweets._id(_id = status["id"])
                     for retweet in retweets:
                         strr =  (retweet["user"]["id"]) 
@@ -158,8 +150,10 @@ for username in us_list:
                     
     anss = float(anss)/len(idsslist)
     dictt_retweet_follo[username] = anss
-    print dictt_retweet_follo[username]
-
+    print 'dictt_retweet_follo: ', dictt_retweet_follo[username]
+    if( (coun%200)==0 ):
+        with open('dictt_retweet_follo.dump', "wb") as fp:
+            pickle.dump(dictt_retweet_follo, fp)        
 
 with open('dictt_retweet_follo.dump', "wb") as fp:
     pickle.dump(dictt_retweet_follo, fp)

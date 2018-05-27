@@ -13,36 +13,14 @@ from scipy.spatial.distance import cdist
 from scipy.spatial import distance
 import math
 import random
+import api_settings
 
-all_data_of_checked_users = []
+settings_file =  "apikeys/apikeys.txt"
+history_file = "apikeys/api_history.txt"
+
 dictt = {}
-No_Of_Users = 20
-cust_users = 10
-total_topics = 20
-latent_leng = 10
-iterr = 100
-betau = 0.4
-betat = 0.4
-lambdau = 0.4
-lambdav = 0.4
+total_topics = 50
 no_top_words = 10
-
-user_friratio = {}
-user_tweet = {}
-matu_f = np.zeros(shape=(No_Of_Users, total_topics)) 
-matu_t = np.zeros(shape=(No_Of_Users, total_topics)) 
-alphac = np.zeros(shape=(No_Of_Users, No_Of_Users))
-alphag = np.zeros(shape=(No_Of_Users, No_Of_Users))
-simimat = np.zeros(shape=(No_Of_Users, No_Of_Users))
-maxxmat = np.zeros(shape=(No_Of_Users, 1))
-learnedu = np.random.rand(No_Of_Users, latent_leng) 
-learnedt = np.random.rand(total_topics, latent_leng) 
-
-st = sys.argv[1]
-print st
-config = {}
-execfile(st, config)
-twitter = Twitter(auth = OAuth(config["access_key"], config["access_secret"], config["consumer_key"], config["consumer_secret"]))
 
 def jaccard_similarity(x, y):
     intersection_cardinality = len(set.intersection(*[set(x), set(y)]))
@@ -65,31 +43,6 @@ def topiclda(X, no_topics, no_top_words):
     lda = LatentDirichletAllocation(n_components=no_topics, max_iter=5, learning_method='online', learning_offset=50.,random_state=0).fit(tf)
     oioi = display_topics2(lda, tf_feature_names, no_top_words)
     return oioi
-def diff(i, j):
-   o1 = learnedu[i]
-   o2 = learnedu[j]
-   subb = o1 - o2
-   subb = (alphac[i][j]*subb)
-   return subb
-def diff2(i, j):
-   o1 = learnedu[i]
-   o2 = learnedu[j]
-   subb = o1 - o2
-   subb = (alphag[i][j]*subb)
-   return subb
-def frob(i, j):
-   o1 = learnedu[i]
-   o2 = learnedu[j]
-   anss = 0
-   for p in range(latent_leng):
-       anss += abs( float(o1[p] - o2[p])*(o1[p] - o2[p]) )
-   anss = (1.0/(1+anss))
-   return anss
-def maxx(vect):
-   ko = 0
-   for j in range(len(vect)):
-      ko = max(ko, vect[j])
-   return ko
 def textobt(results):
     vall = []
     for status in results:
@@ -99,12 +52,14 @@ def textobt(results):
 
 retweet_tweet_dictt = {}
 us_list = []
-inputt = open('tweet_links2.txt', 'r')
+inputt = open('tot3.txt', 'r')
 for line in inputt:
     us = str(line) 
     us_list.append(us) 
 
+coun = 0
 for username in us_list:
+    coun += 1
     username = username.strip() 
     username = username.strip('\n')
     username = username.split('/')
@@ -117,6 +72,8 @@ for username in us_list:
     while( flag2 == 0 ):
         results = []
         try:
+            consumer_key, consumer_secret, access_key, access_secret = api_settings.populate_Settings(settings_file, history_file)
+            twitter = Twitter(auth = OAuth(access_key, access_secret, consumer_key, consumer_secret))
             results = twitter.statuses.user_timeline(screen_name = username, count = 100)
             flag2 = 1
         except Exception as e:
@@ -165,7 +122,9 @@ for username in us_list:
     while( flag2 == 0 ):
         query = []
         try:
-            query = twitter.followers.ids(screen_name = username, count = 100)
+            consumer_key, consumer_secret, access_key, access_secret = api_settings.populate_Settings(settings_file, history_file)
+            twitter = Twitter(auth = OAuth(access_key, access_secret, consumer_key, consumer_secret))
+            query = twitter.friends.ids(screen_name = username, count = 50)
             flag2 = 1
     
             for n in range(0, len(query["ids"])):
@@ -175,6 +134,8 @@ for username in us_list:
                 flag2 = 0
                 while( flag2 == 0 ):
                     try:
+                        consumer_key, consumer_secret, access_key, access_secret = api_settings.populate_Settings(settings_file, history_file)
+                        twitter = Twitter(auth = OAuth(access_key, access_secret, consumer_key, consumer_secret))
                         results = twitter.statuses.user_timeline(user_id = ids, count = 100)
                         flag2 = 1
                     except Exception as e:
@@ -207,7 +168,7 @@ for username in us_list:
                 for i in range(5):
                     for k in range(5):
                          flagx1 = jaccard_similarity(topmodeltweet[i], topmodelfri[k])
-                         retweet_tweet_dictt[ username ] += flagx1 
+                         retweet_tweet_dictt[ username ] = max(retweet_tweet_dictt[ username ], flagx1) 
 
         except TwitterError as e:
             print e
@@ -228,6 +189,12 @@ for username in us_list:
                     time.sleep(60)
                     continue
             flag2 = 1
+
+        print 'retweet_tweet_dictt: ', retweet_tweet_dictt[username]
+             
+        if( (coun%200)==0 ): 
+            with open('retweet_tweet_dictt.dump', "wb") as fp:
+                pickle.dump(retweet_tweet_dictt, fp)
 
 with open('retweet_tweet_dictt.dump', "wb") as fp:
     pickle.dump(retweet_tweet_dictt, fp)

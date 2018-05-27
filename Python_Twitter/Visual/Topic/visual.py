@@ -10,38 +10,45 @@ import numpy as np
 import seaborn as sns
 import xlsxwriter
 
-SIZE_OF_MAT = 100
-workbook = xlsxwriter.Workbook('mat1.xlsx')
-worksheet = workbook.add_worksheet()
+SIZE_OF_MAT = 1000
 
-with open("mat1.dump", "rb") as fp:   # Unpickling
+with open("mapp_username_list2.dump", "rb") as fp:   # Unpickling
     mat1 = pickle.load(fp)
-#with open("mat2.dump", "rb") as fp:   # Unpickling
-#    mat2 = pickle.load(fp)
-
-for i in range(SIZE_OF_MAT):
-     mat1[i] = sorted(mat1[i])
 '''
 for i in range(SIZE_OF_MAT):
      mat1[i] = sorted(mat1[i])
-     su = 0
-     for j in range(SIZE_OF_MAT):
-       su += mat1[i][j]
-     for j in range(SIZE_OF_MAT):
-       mat1[i][j] = float(mat1[i][j])/su	
+     if( i>=600 and i<650 ):
+	     for j in range(40):
+	     	mat1[i][j] = 0 
+print mat1[601]
 '''
 
+us_list = []
+inputt = open('total_users.txt', 'r')
+for line in inputt:
+    us = str(line) 
+    us_list.append(us) 
+
+for username in us_list:
+    username = username.strip() 
+    username = username.strip('\n')
+    username = username.split('/')
+    username = username[3]
+    
+    print username
+    print mat1[username]
+
+'''
 col = 0
 for row, data in enumerate(mat1):
     worksheet.write_row(row, col, data)
 
 workbook.close()
-'''
 ax = sns.heatmap(mat1, linewidth=0.5)
 plt.show()
-'''
 #plt.imshow(mat1, cmap='hot', interpolation='nearest')
 #plt.show()
 
 #plt.imshow(mat2, cmap='hot', interpolation='nearest')
 #plt.show()
+'''

@@ -5,18 +5,22 @@ from Object import *
 from twitter import *
 import unicodedata
 import json
+import api_settings
 
-st = sys.argv[1]
-print st
-config = {}
-execfile(st, config)
-twitter = Twitter(auth = OAuth(config["access_key"], config["access_secret"], config["consumer_key"], config["consumer_secret"]))
+settings_file =  "apikeys/apikeys.txt"
+history_file = "apikeys/api_history.txt"
+
+#st = sys.argv[1]
+#print st
+#config = {}
+#execfile(st, config)
+#twitter = Twitter(auth = OAuth(config["access_key"], config["access_secret"], config["consumer_key"], config["consumer_secret"]))
 userveri = []
 usercust = []
 us_list = []
 dictt = {}
 
-inputt = open('tweet_links.txt', 'r')
+inputt = open('total_users.txt', 'r')
 for line in inputt:
     us = str(line) 
     us_list.append(us) 
