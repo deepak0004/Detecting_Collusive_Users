@@ -89,7 +89,7 @@ def func(us1, us2):
         flag = 1 
     return 0
 
-cust = 300
+cust = 100
 iterr = 10
 us_list = []
 us_cust = []
