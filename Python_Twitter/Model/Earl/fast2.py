@@ -15,7 +15,7 @@ history_file = "apikeys/api_history.txt"
 with open("dictt.dump", "rb") as fp:   # Unpickling
     dictt = pickle.load(fp)
 
-cust = 10
+cust = 50
 iterr = 10
 us_list = []
 usercust = []

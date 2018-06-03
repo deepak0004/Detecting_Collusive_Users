@@ -1,7 +1,7 @@
 import pickle
 import time
 import sys
-from Object import *
+#from Object import *
 from twitter import *
 import unicodedata
 import json
@@ -13,7 +13,7 @@ history_file = "apikeys/api_history.txt"
 dictt = {}
 us_list = []
 
-inputt = open('tot3.txt', 'r')
+inputt = open('total_users.txt', 'r')
 for line in inputt:
     us = str(line) 
     us_list.append(us)
@@ -40,6 +40,8 @@ for username in us_list:
                 op2 = 0
                 for n in range(0, len(query["ids"]), 98):
                     op2 += 1
+                    if( op2>=30 ):
+                       break  
                     ids = [-1]
                     ids.extend( query["ids"][n:n+98] )
                     ids.append(-1)
@@ -98,8 +100,12 @@ for username in us_list:
                 twitter = Twitter(auth = OAuth(access_key, access_secret, consumer_key, consumer_secret))
                 query = twitter.followers.ids(screen_name = username, count = 1000)
                 flag = 1
-
+                  
+                op2 = 0  
                 for n in range(0, len(query["ids"]), 98):
+                    op2 += 1
+                    if( op2>= 30 ):
+                      break
                     ids = [-1]
                     ids.extend( query["ids"][n:n+98] )
                     ids.append(-1)

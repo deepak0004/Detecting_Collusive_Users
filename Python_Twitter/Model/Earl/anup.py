@@ -23,16 +23,16 @@ history_file = "apikeys/api_history.txt"
 #execfile(st, config)
 #twitter = Twitter(auth = OAuth(config["access_key"], config["access_secret"], config["consumer_key"], config["consumer_secret"]))
 
-noofusers = 200
-cust = 100
+noofusers = 100
+cust = 50
 features = []
 labelss = []
 us_list = []
 dictt = {}
 mapp_username_list = {}
 nooffeatures = 11
-star = 51
-endd = 150
+star = 31
+endd = 70
 rows = 0
 listofusers = []
 
