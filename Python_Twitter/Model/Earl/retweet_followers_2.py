@@ -19,7 +19,7 @@ settings_file =  "apikeys/apikeys.txt"
 history_file = "apikeys/api_history.txt"
 
 dictt = {}
-total_topics = 1000
+total_topics = 100
 no_top_words = 10
 
 #st = sys.argv[1]
@@ -155,7 +155,7 @@ for username in us_list:
     dictt_retweet_follo[username] = anss
     print 'dictt_retweet_follo: ', dictt_retweet_follo[username]
     print coun
-    if( (coun%200)==0 ):
+    if( (coun%50)==0 ):
         with open('dictt_retweet_follo.dump', "wb") as fp:
             pickle.dump(dictt_retweet_follo, fp)        
 
