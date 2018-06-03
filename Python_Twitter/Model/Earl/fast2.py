@@ -7,6 +7,7 @@ import json
 import numpy as np
 import api_settings
 from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score, classification_report, confusion_matrix, roc_curve, roc_auc_score, auc
+import os.path
 
 settings_file =  "apikeys/apikeys.txt"
 history_file = "apikeys/api_history.txt"
@@ -14,7 +15,7 @@ history_file = "apikeys/api_history.txt"
 with open("dictt.dump", "rb") as fp:   # Unpickling
     dictt = pickle.load(fp)
 
-cust = 100
+cust = 10
 iterr = 10
 us_list = []
 usercust = []
