@@ -1,0 +1,318 @@
+freewebmentor   1
+DTO_Fr   2
+RustyRokib   3
+kuzandonoz   4
+Katsivan3   5
+Workout4Jesus   6
+Twitter sent status 401 for URL: 1.1/followers/ids.json using parameters: (count=1000&oauth_consumer_key=iHxsKW2mD8ddob2P4r6p24oFBq&oauth_nonce=7319990941544661772&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1528019357&oauth_token=968189102754381824-3J9SdJcxiFuwKbZ3UbJBoegVe6hoVdF&oauth_version=1.0&screen_name=Workout4Jesus&oauth_signature=%2BHwNwRB%2BnsmBDBUOlcieE3lgsR8%3D)
+details: {u'errors': [{u'message': u'Could not authenticate you.', u'code': 32}]}
+yo3
+["{u'errors'", " [{u'message'", " u'Could not authenticate you.', u'code'", ' 32}]}']
+32
+BitplaceTo   7
+mdabdulbari1993   8
+Begum__Ozdemirr   9
+rajmanoj11   10
+0
+1
+2
+3
+4
+meeeee
+5
+6
+7
+8
+9
+Found at this point:  10
+Changed:  0
+freewebmentor   1
+DTO_Fr   2
+RustyRokib   3
+kuzandonoz   4
+Katsivan3   5
+Workout4Jesus   6
+BitplaceTo   7
+mdabdulbari1993   8
+Begum__Ozdemirr   9
+rajmanoj11   10
+0
+1
+2
+3
+4
+meeeee
+5
+6
+7
+8
+9
+Found at this point:  10
+Changed:  0
+freewebmentor   1
+DTO_Fr   2
+RustyRokib   3
+kuzandonoz   4
+Katsivan3   5
+Workout4Jesus   6
+BitplaceTo   7
+mdabdulbari1993   8
+Begum__Ozdemirr   9
+rajmanoj11   10
+0
+1
+2
+3
+4
+meeeee
+5
+6
+7
+8
+9
+Found at this point:  10
+Changed:  0
+freewebmentor   1
+DTO_Fr   2
+RustyRokib   3
+kuzandonoz   4
+Twitter sent status 401 for URL: 1.1/followers/ids.json using parameters: (count=1000&oauth_consumer_key=iHxsKW2mD8ddob2P4r6p24oFBq&oauth_nonce=8732895971760752639&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1528021031&oauth_token=968189102754381824-3J9SdJcxiFuwKbZ3UbJBoegVe6hoVdF&oauth_version=1.0&screen_name=kuzandonoz&oauth_signature=8YduVpdg16GCd9u4%2BLnf6QNoVLs%3D)
+details: {u'errors': [{u'message': u'Could not authenticate you.', u'code': 32}]}
+yo3
+["{u'errors'", " [{u'message'", " u'Could not authenticate you.', u'code'", ' 32}]}']
+32
+Katsivan3   5
+Workout4Jesus   6
+BitplaceTo   7
+mdabdulbari1993   8
+Begum__Ozdemirr   9
+rajmanoj11   10
+0
+1
+2
+3
+4
+meeeee
+5
+6
+7
+8
+9
+Found at this point:  10
+Changed:  0
+freewebmentor   1
+DTO_Fr   2
+RustyRokib   3
+[Errno 104] Connection reset by peer
+yo1
+0
+1
+2
+3
+4
+meeeee
+5
+6
+7
+8
+9
+Found at this point:  10
+Changed:  0
+freewebmentor   1
+DTO_Fr   2
+RustyRokib   3
+kuzandonoz   4
+Katsivan3   5
+Workout4Jesus   6
+BitplaceTo   7
+mdabdulbari1993   8
+Begum__Ozdemirr   9
+rajmanoj11   10
+0
+1
+2
+3
+4
+meeeee
+5
+6
+7
+8
+9
+Found at this point:  10
+Changed:  0
+freewebmentor   1
+DTO_Fr   2
+RustyRokib   3
+kuzandonoz   4
+Katsivan3   5
+Workout4Jesus   6
+BitplaceTo   7
+mdabdulbari1993   8
+Begum__Ozdemirr   9
+Twitter sent status 401 for URL: 1.1/followers/ids.json using parameters: (count=1000&oauth_consumer_key=iHxsKW2mD8ddob2P4r6p24oFBq&oauth_nonce=566960907176881855&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1528022878&oauth_token=968189102754381824-3J9SdJcxiFuwKbZ3UbJBoegVe6hoVdF&oauth_version=1.0&screen_name=Begum__Ozdemirr&oauth_signature=5tyhIspNkXAzek8D4meS70PWc94%3D)
+details: {u'errors': [{u'message': u'Could not authenticate you.', u'code': 32}]}
+yo3
+["{u'errors'", " [{u'message'", " u'Could not authenticate you.', u'code'", ' 32}]}']
+32
+rajmanoj11   10
+0
+1
+2
+3
+4
+meeeee
+5
+6
+7
+8
+9
+Found at this point:  10
+Changed:  0
+freewebmentor   1
+DTO_Fr   2
+RustyRokib   3
+kuzandonoz   4
+Katsivan3   5
+Workout4Jesus   6
+BitplaceTo   7
+mdabdulbari1993   8
+Begum__Ozdemirr   9
+rajmanoj11   10
+0
+1
+2
+3
+4
+meeeee
+5
+6
+7
+8
+9
+Found at this point:  10
+Changed:  0
+freewebmentor   1
+DTO_Fr   2
+RustyRokib   3
+kuzandonoz   4
+Katsivan3   5
+Workout4Jesus   6
+BitplaceTo   7
+mdabdulbari1993   8
+Begum__Ozdemirr   9
+rajmanoj11   10
+0
+1
+2
+3
+4
+meeeee
+5
+6
+7
+8
+9
+Found at this point:  10
+Changed:  0
+freewebmentor   1
+DTO_Fr   2
+RustyRokib   3
+kuzandonoz   4
+Katsivan3   5
+Workout4Jesus   6
+BitplaceTo   7
+Twitter sent status 401 for URL: 1.1/followers/ids.json using parameters: (count=1000&oauth_consumer_key=iHxsKW2mD8ddob2P4r6p24oFBq&oauth_nonce=16413510793084858748&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1528024646&oauth_token=968189102754381824-3J9SdJcxiFuwKbZ3UbJBoegVe6hoVdF&oauth_version=1.0&screen_name=BitplaceTo&oauth_signature=c9zfeb%2BKiCJ8yCJNkvlmodTbmqU%3D)
+details: {u'errors': [{u'message': u'Could not authenticate you.', u'code': 32}]}
+yo3
+["{u'errors'", " [{u'message'", " u'Could not authenticate you.', u'code'", ' 32}]}']
+32
+mdabdulbari1993   8
+Begum__Ozdemirr   9
+rajmanoj11   10
+0
+1
+2
+3
+4
+meeeee
+5
+6
+7
+8
+9
+Found at this point:  10
+Changed:  0
+freewebmentor   1
+DTO_Fr   2
+RustyRokib   3
+kuzandonoz   4
+Katsivan3   5
+Workout4Jesus   6
+BitplaceTo   7
+mdabdulbari1993   8
+Begum__Ozdemirr   9
+rajmanoj11   10
+0
+1
+2
+3
+4
+meeeee
+5
+6
+7
+8
+9
+Found at this point:  10
+Changed:  0
+freewebmentor   1
+DTO_Fr   2
+RustyRokib   3
+kuzandonoz   4
+Katsivan3   5
+Workout4Jesus   6
+BitplaceTo   7
+mdabdulbari1993   8
+Begum__Ozdemirr   9
+rajmanoj11   10
+0
+1
+2
+3
+4
+meeeee
+5
+6
+7
+8
+9
+Found at this point:  10
+Changed:  0
+freewebmentor   1
+DTO_Fr   2
+RustyRokib   3
+kuzandonoz   4
+Katsivan3   5
+Twitter sent status 401 for URL: 1.1/followers/ids.json using parameters: (count=1000&oauth_consumer_key=iHxsKW2mD8ddob2P4r6p24oFBq&oauth_nonce=10544897118220861390&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1528026311&oauth_token=968189102754381824-3J9SdJcxiFuwKbZ3UbJBoegVe6hoVdF&oauth_version=1.0&screen_name=Katsivan3&oauth_signature=WgSBE%2BHDXVRHySYrjLk%2BEcUppFI%3D)
+details: {u'errors': [{u'message': u'Could not authenticate you.', u'code': 32}]}
+yo3
+["{u'errors'", " [{u'message'", " u'Could not authenticate you.', u'code'", ' 32}]}']
+32
+Workout4Jesus   6
+BitplaceTo   7
+mdabdulbari1993   8
+Begum__Ozdemirr   9
+0
+1
+2
+3
+4
+meeeee
+5
+6
+7
+8
+9
+Found at this point:  10
+Changed:  0

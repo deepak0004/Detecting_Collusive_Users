@@ -11,7 +11,6 @@ from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_sc
 import api_settings
 import numpy as np
 from sklearn import svm
-import os.path
 
 settings_file =  "apikeys/apikeys.txt"
 history_file = "apikeys/api_history.txt"
@@ -23,19 +22,17 @@ history_file = "apikeys/api_history.txt"
 #execfile(st, config)
 #twitter = Twitter(auth = OAuth(config["access_key"], config["access_secret"], config["consumer_key"], config["consumer_secret"]))
 
-noofusers = 200
-cust = 100
+noofusers = 1000
+cust = 300
 features = []
 labelss = []
 us_list = []
 dictt = {}
 mapp_username_list = {}
 nooffeatures = 11
-star = 51
-endd = 150
+star = 151
+endd = 450
 rows = 0
-listofusers = []
-
 '''
 noofusers = 10
 star = 3
@@ -77,7 +74,6 @@ for username in us_list:
                 for user in query:
                         #print user["screen_name"]
                         flag2 = 0
-                        results = []
                         while( flag2 == 0 ):
                             try:
                                 consumer_key, consumer_secret, access_key, access_secret = api_settings.populate_Settings(settings_file, history_file)
@@ -198,59 +194,46 @@ print('Training')
 clf2.fit(trainvector, trainlabel)
 print 'Done'
 
-'''
 ytrue = []
 ypred = []
-'''
 rejected = 0
 
 for i in range(star, endd):
-    username = us_list[i].strip() 
-    username = username.strip('\n')
-    username = username.split('/')
-    username = username[3]
-    coun += 1
+    if( i<cust ):
+        ytrue.append(1)
+    else:
+        ytrue.append(0)
     op = trainvector[i] 
     ans = 0
-
     try:
         #print op
         labell = clf2.predict([op])
+        ypred.append(labell)
         if( labell==1 and i<=cust ):
             ans += 1
-            listofusers.append(username)
+        elif( labell==0 and i>cust ):
+            ans += 1 
     except Exception: 
         rejected += 1
         pass
 
-print 'Found at this point: ', ans
-
-if( os.path.exists('listofusersanup.dump') ):
-    val = 0
-    with open('listofusersanup.dump', "rb") as fp: 
-       listofusers2 = pickle.load(fp)
-    for ele in listofusers2:
-        if( ele not in listofusers ):
-            val += 1
-    print 'Changed: ', val 
-
-with open('listofusersanup.dump', "wb") as fp:
-    pickle.dump(listofusers, fp)
-
-
-'''
 print 'ypred ', ypred
 print 'ytrue ', ytrue
+
+print float(ans)/cust
 fpr, tpr, thresholds = roc_curve(ytrue, ypred, pos_label=2)
+
 print(f1_score(ytrue, ypred, average="macro"))
 print(precision_score(ytrue, ypred, average="macro"))
 print(recall_score(ytrue, ypred, average="macro"))    
 print(roc_auc_score(ytrue, ypred, average="macro"))
+
 print(f1_score(ytrue, ypred, average="micro"))
 print(precision_score(ytrue, ypred, average="micro"))
 print(recall_score(ytrue, ypred, average="micro"))    
 print(roc_auc_score(ytrue, ypred, average="micro"))
+
 print(auc(fpr, tpr))
+
 #with open('trainvector.dump', "wb") as fp:
 #    pickle.dump(trainvector, fp)
-'''
