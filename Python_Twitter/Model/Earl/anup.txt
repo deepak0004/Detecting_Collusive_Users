@@ -1,0 +1,133 @@
+freewebmentor
+8,4164, 0.9980824545,663, 1446,False , 99,0
+DTO_Fr
+1608,1115, 0.4094748439,114, 197,False , 70,0
+RustyRokib
+459,5875, 0.9275339438,3685, 646,False , 52,0
+kuzandonoz
+429,2609, 0.8587886768,887, 1313,False , 42,0
+Katsivan3
+1433,7268, 0.8353062866,30247, 60513,False , 53,0
+Workout4Jesus
+63534,56743, 0.4717693325,26, 378,False , 48,0
+BitplaceTo
+150,18921, 0.9921346547,177, 87,False , 77,0
+mdabdulbari1993
+166,886, 0.8422053232,259, 1702,False , 79,0
+Begum__Ozdemirr
+38919,52933, 0.5762857641,28583, 4968,False , 13,0
+rajmanoj11
+148,760, 0.8370044053,15, 20,False , 6,0
+Defining
+Training
+Done
+Found at this point:  0
+Changed:  0
+freewebmentor
+8,4164, 0.9980824545,663, 1446,False , 99,0
+DTO_Fr
+1608,1115, 0.4094748439,114, 197,False , 70,0
+RustyRokib
+459,5875, 0.9275339438,3685, 646,False , 52,0
+kuzandonoz
+429,2609, 0.8587886768,887, 1313,False , 42,0
+Katsivan3
+1433,7268, 0.8353062866,30247, 60513,False , 53,0
+Workout4Jesus
+63532,56738, 0.4717552174,26, 378,False , 48,0
+BitplaceTo
+150,18921, 0.9921346547,177, 87,False , 77,0
+mdabdulbari1993
+Twitter sent status 401 for URL: 1.1/statuses/user_timeline.json using parameters: (count=100&oauth_consumer_key=iHxsKW2mD8ddob2P4r6p24oFBq&oauth_nonce=13999964452319539026&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1528010997&oauth_token=968189102754381824-3J9SdJcxiFuwKbZ3UbJBoegVe6hoVdF&oauth_version=1.0&screen_name=mdabdulbari1993&oauth_signature=2LuWN1flAAdb6UlOp96CmNzmliU%3D)
+details: {u'errors': [{u'message': u'Could not authenticate you.', u'code': 32}]}
+yo1
+32
+166,886, 0.8422053232,259, 1702,False , 0,0
+Begum__Ozdemirr
+38919,52933, 0.5762857641,28583, 4968,False , 13,0
+rajmanoj11
+148,760, 0.8370044053,15, 20,False , 6,0
+Defining
+Training
+Done
+Found at this point:  0
+Changed:  2
+freewebmentor
+8,4164, 0.9980824545,663, 1446,False , 99,0
+DTO_Fr
+1608,1115, 0.4094748439,114, 197,False , 70,0
+RustyRokib
+459,5875, 0.9275339438,3685, 646,False , 52,0
+kuzandonoz
+429,2609, 0.8587886768,887, 1313,False , 42,0
+Katsivan3
+1433,7268, 0.8353062866,30247, 60513,False , 53,0
+Workout4Jesus
+63534,56743, 0.4717693325,26, 378,False , 48,0
+BitplaceTo
+150,18921, 0.9921346547,177, 87,False , 77,0
+mdabdulbari1993
+166,886, 0.8422053232,259, 1702,False , 79,0
+Begum__Ozdemirr
+38919,52933, 0.5762857641,28583, 4968,False , 13,0
+rajmanoj11
+148,760, 0.8370044053,15, 20,False , 6,0
+Defining
+Training
+Done
+Found at this point:  0
+Changed:  0
+freewebmentor
+8,4164, 0.9980824545,663, 1446,False , 99,0
+DTO_Fr
+1608,1115, 0.4094748439,114, 197,False , 70,0
+RustyRokib
+459,5875, 0.9275339438,3685, 646,False , 52,0
+kuzandonoz
+429,2609, 0.8587886768,887, 1313,False , 42,0
+Katsivan3
+1433,7268, 0.8353062866,30247, 60513,False , 53,0
+Workout4Jesus
+63534,56743, 0.4717693325,26, 378,False , 48,0
+BitplaceTo
+150,18921, 0.9921346547,177, 87,False , 77,0
+mdabdulbari1993
+166,886, 0.8422053232,259, 1702,False , 79,0
+Begum__Ozdemirr
+38919,52933, 0.5762857641,28583, 4968,False , 13,0
+rajmanoj11
+148,760, 0.8370044053,15, 20,False , 6,0
+Defining
+Training
+Done
+Found at this point:  0
+Changed:  0
+freewebmentor
+8,4164, 0.9980824545,663, 1446,False , 99,0
+DTO_Fr
+1608,1115, 0.4094748439,114, 197,False , 70,0
+RustyRokib
+459,5875, 0.9275339438,3685, 646,False , 52,0
+kuzandonoz
+429,2609, 0.8587886768,887, 1313,False , 42,0
+Katsivan3
+1433,7268, 0.8353062866,30247, 60513,False , 53,0
+Workout4Jesus
+Twitter sent status 401 for URL: 1.1/statuses/user_timeline.json using parameters: (count=100&oauth_consumer_key=iHxsKW2mD8ddob2P4r6p24oFBq&oauth_nonce=4215867386440640682&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1528011294&oauth_token=968189102754381824-3J9SdJcxiFuwKbZ3UbJBoegVe6hoVdF&oauth_version=1.0&screen_name=Workout4Jesus&oauth_signature=%2Fo%2F%2BK2yUjLEu4xSPJVNxgfc%2BH7Q%3D)
+details: {u'errors': [{u'message': u'Could not authenticate you.', u'code': 32}]}
+yo1
+32
+63534,56743, 0.4717693325,26, 378,False , 0,0
+BitplaceTo
+150,18921, 0.9921346547,177, 87,False , 77,0
+mdabdulbari1993
+166,886, 0.8422053232,259, 1702,False , 79,0
+Begum__Ozdemirr
+38919,52933, 0.5762857641,28583, 4968,False , 13,0
+rajmanoj11
+148,760, 0.8370044053,15, 20,False , 6,0
+Defining
+Training
+Done
+Found at this point:  0
+Changed:  0
