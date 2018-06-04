@@ -10,20 +10,27 @@ import numpy as np
 import seaborn as sns
 import xlsxwriter
 
-SIZE_OF_MAT = 1000
-
-with open("retweet_tweet_dictt.dump", "rb") as fp:   # Unpickling
+with open("dictt_retweet_follo2.dump", "rb") as fp:   # Unpickling
     mat1 = pickle.load(fp)
+
+SIZE_OF_MAT = 1000
+pp = 0
+#mat2 = np.zeros(shape=(40, 100)) 
 '''
 for i in range(SIZE_OF_MAT):
-     mat1[i] = sorted(mat1[i])
-     if( i>=600 and i<650 ):
-	     for j in range(40):
-	     	mat1[i][j] = 0 
-print mat1[601]
+     if( i<20 ):
+         for j in range(100):
+            mat2[pp][j] = mat1[i][j]
+         pp += 1
+     if( i>=500 and i<520 ):
+         for j in range(100):
+            mat2[pp][j] = mat1[i][j] 
+         pp += 1
+print pp
 '''
-#print len(mat1)
 
+#print len(mat1)
+mat2 = {}
 us_list = []
 inputt = open('total_users.txt', 'r')
 for line in inputt:
@@ -39,19 +46,32 @@ for username in us_list:
     
     print username, " ", coun
     print mat1[username]
+    if( coun<20 ):
+        mat2[username] = mat1[username]
+        pp += 1
+    if( coun>=500 and coun<520 ):
+        mat2[username] = mat1[username]
+        pp += 1
+
     coun += 1
 
+#col = 0
 '''
-col = 0
 for row, data in enumerate(mat1):
     worksheet.write_row(row, col, data)
 
 workbook.close()
 ax = sns.heatmap(mat1, linewidth=0.5)
 plt.show()
+'''
 #plt.imshow(mat1, cmap='hot', interpolation='nearest')
 #plt.show()
 
 #plt.imshow(mat2, cmap='hot', interpolation='nearest')
 #plt.show()
-'''
+
+with open('Retweet_Ratio.dump', "wb") as fp: 
+    pickle.dump(mat2, fp)
+
+print mat2['abhisheksapabap']
+#print mat2[]

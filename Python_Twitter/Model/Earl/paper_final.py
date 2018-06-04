@@ -22,8 +22,8 @@ def normalize(v):
     return v/norm
 
 dictt = {}
-No_Of_Users = 100
-cust_users = 50
+No_Of_Users = 10
+cust_users = 5
 total_topics = 100
 latent_leng = 10
 iterr = 1
@@ -95,18 +95,18 @@ def maxx(vect):
    return ko
 
 us_list = []
-inputt = open('total_users.txt', 'r')
+inputt = open('tot3.txt', 'r')
 for line in inputt:
     us = str(line) 
     us_list.append(us) 
 
-with open('ICDM/matu_f.dump', "rb") as fp: 
+with open('matu_f.dump', "rb") as fp: 
     matu_f = pickle.load(fp)
-with open("ICDM/retweet_tweet_dictt.dump", "rb") as fp:  
+with open("retweet_tweet_dictt.dump", "rb") as fp:  
     retweet_tweet_dictt = pickle.load(fp)
-with open("ICDM/mapp_username_list24.dump", "rb") as fp:  
+with open("mapp_username_list24.dump", "rb") as fp:  
     mapp_username_list = pickle.load(fp)
-with open("ICDM/dictt_retweet_follo.dump", "rb") as fp:  
+with open("dictt_retweet_follo.dump", "rb") as fp:  
     dictt_retweet_follo = pickle.load(fp)
 
 for i in range(No_Of_Users):
@@ -205,36 +205,31 @@ yx.sort(reverse=True)
 anss = 0
 ytrue = []
 ypred = []
-  
+listofusers = []
+
 #print 'yx: ', yx
 for i in range(len(yx)):
+    username = us_list[i].strip() 
+    username = username.strip('\n')
+    username = username.split('/')
+    username = username[3]
+
     if( i<KK ):
         ypred.append(1)
         if( yx[i][1] < cust_users ):
             anss += 1
-            ytrue.append(1)
-        else:
-            ytrue.append(0)  
-    else:
-        ypred.append(0)
-        if( yx[i][1] < cust_users ):
-            ytrue.append(1)
-        else:
-            ytrue.append(0)
+            listofusers.append(username)
 
-print( float(anss)/No_Of_Users )
-print 'ypred ', ypred
-print 'ytrue ', ytrue
+print 'Found at this point: ', ans
 
-print float(anss)/cust_users
-fpr, tpr, thresholds = roc_curve(ytrue, ypred, pos_label=2)
+if( os.path.exists('listofusersour.dump') ):
+    val = 0
+    with open('listofusersour.dump', "rb") as fp: 
+       listofusers2 = pickle.load(fp)
+    for ele in listofusers2:
+        if( ele not in listofusers ):
+            val += 1
+    print 'Changed: ', val 
 
-print(f1_score(ytrue, ypred, average="macro"))
-print(precision_score(ytrue, ypred, average="macro"))
-print(recall_score(ytrue, ypred, average="macro"))    
-print(roc_auc_score(ytrue, ypred, average="macro"))
-
-print(f1_score(ytrue, ypred, average="micro"))
-print(precision_score(ytrue, ypred, average="micro"))
-print(recall_score(ytrue, ypred, average="micro"))    
-print(roc_auc_score(ytrue, ypred, average="micro"))
+with open('listofusersour.dump', "wb") as fp:
+    pickle.dump(listofusers, fp)
