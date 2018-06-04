@@ -209,10 +209,7 @@ listofusers = []
 
 #print 'yx: ', yx
 for i in range(len(yx)):
-    username = us_list[i].strip() 
-    username = username.strip('\n')
-    username = username.split('/')
-    username = username[3]
+    username = us_list[i]
 
     if( i<KK ):
         if( yx[i][1] < cust_users ):
