@@ -215,12 +215,11 @@ for i in range(len(yx)):
     username = username[3]
 
     if( i<KK ):
-        ypred.append(1)
         if( yx[i][1] < cust_users ):
             anss += 1
             listofusers.append(username)
 
-print 'Found at this point: ', ans
+print 'Found at this point: ', anss
 
 if( os.path.exists('listofusersour.dump') ):
     val = 0
